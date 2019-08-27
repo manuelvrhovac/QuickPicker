@@ -133,6 +133,6 @@ Use QuickPicker to pick single or multiple photos or videos.
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-s.dependency "KVFetcher", "> 0.9.1"
+s.dependency "KVFetcher"
 
 end
