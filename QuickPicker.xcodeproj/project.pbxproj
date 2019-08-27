@@ -14,6 +14,7 @@
 		6429606A231593E700DB8D49 /* Ext+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64296065231593E300DB8D49 /* Ext+String.swift */; };
 		6429606B231593E700DB8D49 /* Ext+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64296063231593E300DB8D49 /* Ext+UIKit.swift */; };
 		6429606C231593E700DB8D49 /* SBInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64296064231593E300DB8D49 /* SBInitializable.swift */; };
+		642960722315995F00DB8D49 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 642960712315995F00DB8D49 /* .gitignore */; };
 		642DBB562264C57100B9EC4E /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DBB552264C57100B9EC4E /* AlbumViewModel.swift */; };
 		642DBB6F2265012B00B9EC4E /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DBB6E2265012B00B9EC4E /* ReviewViewModel.swift */; };
 		642DBB71226534F100B9EC4E /* QuickPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642DBB70226534F100B9EC4E /* QuickPickerModel.swift */; };
@@ -128,6 +129,7 @@
 		64296065231593E300DB8D49 /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
 		64296066231593E300DB8D49 /* Ext+Foundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Foundation.swift"; sourceTree = "<group>"; };
 		64296067231593E400DB8D49 /* Ext+Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+Photos.swift"; sourceTree = "<group>"; };
+		642960712315995F00DB8D49 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		642DBB552264C57100B9EC4E /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		642DBB6E2265012B00B9EC4E /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
 		642DBB70226534F100B9EC4E /* QuickPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPickerModel.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 		643259B9225DF12A00205020 = {
 			isa = PBXGroup;
 			children = (
+				642960712315995F00DB8D49 /* .gitignore */,
 				64CF3AEC22A91BF600871ACE /* QuickPicker.framework */,
 				643259C5225DF12A00205020 /* QuickPicker */,
 				643259D0225DF12A00205020 /* QuickPickerTests */,
@@ -519,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64325A0F225DF13700205020 /* ItemCellView.xib in Resources */,
+				642960722315995F00DB8D49 /* .gitignore in Resources */,
 				64325A51225E98B200205020 /* Assets.xcassets in Resources */,
 				64325A15225DF13700205020 /* AlbumCellView.xib in Resources */,
 				648D184A226B2B8600983CA0 /* ReviewViewController.storyboard in Resources */,
