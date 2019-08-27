@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "QuickPicker"
-  s.version      = "0.9.0"
+  s.version      = "0.9.1"
   s.summary      = "The ultimate media picker"
 
   # This description is used to generate tags and improve search results.
@@ -63,8 +63,8 @@ Use QuickPicker to pick single or multiple photos or videos.
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-   s.platform     = :ios, "10.0"
-   s.swift_versions = "4.0"
+   s.platform     = :ios, "10.3"
+   s.swift_versions = "4.2"
 
   #  When using multiple platforms
    s.ios.deployment_target = "10.0"
@@ -134,5 +134,8 @@ Use QuickPicker to pick single or multiple photos or videos.
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 s.dependency "KVFetcher"
+s.dependency "RxCocoa"
+s.dependency "RxSwift"
+s.dependency "RxRelay"
 
 end
