@@ -1,7 +1,4 @@
 //
-//  ImageBarButton.swift
-//  QuickPicker
-//
 //  Created by Manuel Vrhovac on 05/06/2019.
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
@@ -14,6 +11,7 @@ class ImageBarButtonItem: UIBarButtonItem {
     var button: UIButton {
         return customView as! UIButton
     }
+    
     override var image: UIImage? {
         get {
             return button.image(for: .normal)

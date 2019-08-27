@@ -1,7 +1,4 @@
 //
-//  QuickPicker.swift
-//  QuickPicker
-//
 //  Created by Manuel Vrhovac on 11/04/2019.
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
@@ -77,6 +74,19 @@ extension PHAsset {
 }
 
 extension PHImageManager {
+    
+    /*
+    enum RequestQuality {
+        case thumbnail
+        case full(_ targetSize: CGSize)
+    }
+    
+    func requestImage(for asset: PHAsset, quality: RequestQuality, completion: ((UIImage?) -> Void)?) {
+        switch quality {
+        case .thumbnail: requestThumbnailImage(for: asset, completion: completion)
+        case .full(let size): requestFullImage(for: asset, targetSize: size, completion: completion)
+        }
+    }*/
     
     func getThumbnail(for asset: PHAsset) -> UIImage? {
         return Syncer<UIImage>.waitFor(timeout: 10.0, task: { semaphore in

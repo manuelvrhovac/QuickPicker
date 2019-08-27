@@ -1,7 +1,4 @@
 //
-//  ReviewViewModel.swift
-//  QuickPicker
-//
 //  Created by Manuel Vrhovac on 15/04/2019.
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
@@ -12,9 +9,6 @@ import KVFetcher
 import RxSwift
 import RxCocoa
 
-var appImageManager: PHImageManager {
-    return .default()
-}
 
 extension UIImage {
     
@@ -50,8 +44,7 @@ class ReviewViewModel {
     // MARK: - Properties
     
     var canAddMore: Bool
-    var is3d: Bool = false
-    var fetchers: (full: QPImageFetcher.Caching.Active, thumbnail: QPImageFetcher.Caching)!
+    var fetchers: (full: QPImageFetcher, thumbnail: QPImageFetcher)!
     var completion: Completion!
     var assets: BehaviorRelay<[PHAsset]> = .init(value: [])
     
@@ -84,15 +77,24 @@ class ReviewViewModel {
         self.assets.v = assets
         self.completion = completion
         self.canAddMore = canAddMore
-        
-        let fullImageFetcher = QPImageFetcher.Caching.Active (
-            deliveryMode: .highQualityFormat,
-            keys: { return self.assets.value },
-            currentIndex: { return self.currentIndex.value },
+        let fullImageFetcher = QPImageFetcher (
+            keys: self.assets.value,
+            currentIndex: self.currentIndex.value,
             options: .upcoming(10),
             cacher: .init(maxCount: 20)
         )
+        fullImageFetcher.deliveryMode = .highQualityFormat
+        
+        self.currentIndex
+            .bind(onNext: { fullImageFetcher.currentIndex = $0 })
+            .disposed(by: bag)
+        
+        self.assets
+            .bind(onNext: { fullImageFetcher.keys = $0 })
+            .disposed(by: bag)
+        
         fullImageFetcher.displaySize = .init(width: 800, height: 800)
+        
         
         /*let fullImageFetcher = PhotosFetcher.Caching.Active(.full(targetSize: .init(width: 800, height: 800)),
                                                            keys: { return self.assets.value },
@@ -101,7 +103,7 @@ class ReviewViewModel {
                                                            cacher: .init(maxCount: 20))*/
         fullImageFetcher.startPrefetching()
         
-        let thumbnailFetcher = QPImageFetcher.Caching(
+        let thumbnailFetcher = QPImageFetcher(
             deliveryMode: .fastFormat,
             cacher: .init(maxCount: 500)
         )
@@ -150,9 +152,9 @@ class ReviewViewModel {
             return existing
         }
         let itemCellViewModel = ItemCellViewModel(item: assets.value[index],
-                                         isSelected: false,
-                                         selectionStyle: .outline,
-                                         imageFetcher: fetchers!.thumbnail)
+                                                  isSelected: false,
+                                                  selectionStyle: .outline,
+                                                  imageFetcher: fetchers!.thumbnail)
         itemCellViewModels[asset] = itemCellViewModel
         return itemCellViewModel
     }
@@ -178,8 +180,10 @@ class ReviewViewModel {
         fetchers.full.cacher.removeAllResults()
         fetchers.full.cleanQueue()
         fetchers.full.stopPrefetching()
-        fetchers.full = .empty
-        fetchers.thumbnail = .init(deliveryMode: .fastFormat, cacher: .init(maxCount: 0))
+        fetchers.full = .init(deliveryMode: .fastFormat,
+                              cacher: .init(maxCount: 0))
+        fetchers.thumbnail = .init(deliveryMode: .fastFormat,
+                                   cacher: .init(maxCount: 0))
     }
     
     func getPreview(atIndex index: Int, completion: @escaping (PreviewResult) -> Void) {
@@ -187,7 +191,7 @@ class ReviewViewModel {
         let index = currentIndex.value
         switch asset.mediaType {
         case .image:
-            if let cachedFullImage = fetchers.full.cacher.cachedResult(for: asset) {
+            if let cachedFullImage = fetchers.full.cacher.cachedValue(for: asset) {
                 completion(.image(cachedFullImage))
             } else {
                 fetchers.thumbnail.fetchValue(for: asset, priority: .now) { image in

@@ -1,8 +1,5 @@
 //
-//  AlbumCoverCollectionView.swift
-//  Wideshow4
-//
-//  Created by Manuel Vrhovac on 01/07/2018.
+//  Created by Manuel Vrhovac on 01/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
 //
 
@@ -36,11 +33,6 @@ class AlbumView: SmartLayoutCollectionView {
         delegate = self
         dataSource = self
         register(.init(nibName: id, bundle: bundle), forCellWithReuseIdentifier: id)
-        
-        delay(1.0) {
-            print(self.contentOffset.y)
-        }
-        setupBindings()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -48,17 +40,9 @@ class AlbumView: SmartLayoutCollectionView {
         scrollView.scrollToTopMarginIfOnEdge()
     }
     
-    func setupBindings() {
-        viewModel.selectedIndexPath.skip(1).bind(onNext: highlightIndexPath).disposed(by: bag)
-    }
-    
     func highlightIndexPath(_ indexPath: IndexPath) {
         let cell = cellForItem(at: indexPath)!
-        UIView.animate(withDuration: 0.4, animations: {
-            cell.transform = CGAffineTransform(translationX: 0, y: 3.0).concatenating(.init(scaleX: 0.85, y: 0.85))
-        }, completion: { _ in
-            cell.transform = .identity
-        })
+        cell.animateShrinkGrow(duration: 0.3)
     }
     
     // MARK: - Private methods
@@ -92,6 +76,9 @@ extension AlbumView: UICollectionViewDataSource {
 extension AlbumView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectedItemAt(indexPath)
+        highlightIndexPath(indexPath)
+        delay(0.05) {
+            self.viewModel.selectedItemAt(indexPath)
+        }
     }
 }

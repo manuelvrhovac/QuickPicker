@@ -1,8 +1,5 @@
 //
-//  ReviewViewController.swift
-//  Wideshow4
-//
-//  Created by Manuel Vrhovac on 13/08/2018.
+//  Created by Manuel Vrhovac on 13/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
 //
 
@@ -12,38 +9,10 @@ import AVKit
 import RxSwift
 import RxCocoa
 
-extension ReviewViewController: UIGestureRecognizerDelegate {
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        print("Swiped")
-        return true
-    }
-}
-
-extension ReviewViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-        ) -> UICollectionViewCell {
-        let ivm = viewModel.itemCellViewModel(atIndex: indexPath.row)
-        ivm.fetchImage()
-        let cell = cv.dequeue(ItemCellView.self, for: indexPath)!
-        cell.configure(viewModel: ivm)
-        cell.imageView.layer.cornerRadius = 4.0
-        return cell
-    }
-}
-
 
 class ReviewViewController: UIViewController {
     
-    
-    var viewModel: ReviewViewModel!
+    // MARK: IBOutlets
     
     @IBOutlet private(set) weak var countLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -57,10 +26,16 @@ class ReviewViewController: UIViewController {
     @IBOutlet private(set) weak var addMoreButton: UIButton!
     
     @IBOutlet private(set) weak var buttonStack: UIStackView!
-    // MARK: - Properties
     
+    // MARK: Properties
+    
+    var viewModel: ReviewViewModel!
     var swipeGestureRecognizer: UISwipeGestureRecognizer!
     var leftSwipe: UISwipeGestureRecognizer!
+    var collectionView: SmartLayoutCollectionView!
+    var playerView: AVPlayerViewController!
+    var bag = DisposeBag()
+
     // MARK: Calculated
     
     var removeButton: UIButton {
@@ -70,14 +45,15 @@ class ReviewViewController: UIViewController {
         return imageView.superview as! UIStackView
     }
     
-    var cv: SmartLayoutCollectionView!
-    var playerView: AVPlayerViewController!
+    var currentIndex: Int {
+        return viewModel.currentIndex.value
+    }
+    
     var player: AVPlayer! {
         get { return playerView.player }
         set { playerView?.player = newValue }
     }
     
-    var bag = DisposeBag()
     
     // MARK: - Init
 
@@ -107,19 +83,20 @@ class ReviewViewController: UIViewController {
         imageView.addGestureRecognizer(swipeGestureRecognizer)
         imageView.isUserInteractionEnabled = true
         
-        cv = .init(spacing: 3.0, maximumItemWidth: 56)
-        cv.flowLayout.scrollDirection = .horizontal
-        cvStack.addArrangedSubview(cv)
+        collectionView = .init(spacing: 3.0, maximumItemWidth: 56)
+        collectionView.flowLayout.scrollDirection = .horizontal
+        cvStack.addArrangedSubview(collectionView)
         
-        cv.registerNibForCellWith(reuseIdentifier: ItemCellView.selfID, bundle: bundle)
-        cv.dataSource = self
-        cv.contentInset = .zero
-        cv.layoutMargins = .zero
-        cv.backgroundColor = UIColor.black.withAlphaComponent(0.1)
-        cv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cvTapped)))
-        cv.layer.cornerRadius = 6.0
-        cv.alwaysBounceHorizontal = true
-        cv.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        collectionView.registerNibForCellWith(reuseIdentifier: ItemCellView.selfID, bundle: bundle)
+        collectionView.dataSource = self
+        collectionView.contentInset = .zero
+        collectionView.layoutMargins = .zero
+        collectionView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+        collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                   action: #selector(cvTapped)))
+        collectionView.layer.cornerRadius = 6.0
+        collectionView.alwaysBounceHorizontal = true
+        collectionView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         reload()
         
         playerView = .init()
@@ -128,59 +105,72 @@ class ReviewViewController: UIViewController {
         mediaStack.addArrangedSubview(playerView.view)
         
         setupBindings()
+        viewModel.assets.accept(viewModel.assets.value)
     }
     
     static func initi(viewModel: ReviewViewModel) -> ReviewViewController {
-        let rvc = ReviewViewController.initi(storyboarddName: nil)!
+        let rvc = UIStoryboard.instantiateVC(ReviewViewController.self)
         rvc.viewModel = viewModel
         return rvc
     }
 
     
     func setupBindings() {
-        viewModel.currentIndex.bind(onNext: indexChanged).disposed(by: bag)
-        viewModel.onFinish.bind(onNext: clearAndDismiss(result:)).disposed(by: bag)
+        let assetsChanged = viewModel
+            .assets
+            .share()
         
-        let assetsChanged = viewModel.assets.share()
-        assetsChanged.map { _ in }.bind(onNext: reload).disposed(by: bag)
-        
-        let assetsCount = assetsChanged.map { $0.count }.share()
-        assetsCount.map { $0 < 2 }.bind(to: removeButton.rx.isHidden).disposed(by: bag)
-        assetsCount.map { $0 < 2 }.bind(to: cvStack.rx.isHidden).disposed(by: bag)
-        assetsCount.map { $0 < 30 }.bind(to: slider.superview!.rx.isHidden).disposed(by: bag)
-        
-        // Interaction:
-        
-        removeButton.rx.tap
-            .bind(onNext: viewModel.removeCurrentAsset)
-            .disposed(by: bag)
+        let assetsCount = assetsChanged
+            .map { $0.count }
+            .share()
         
         let sliderValue = slider.rx.value
             .map { return Int($0 * Float(self.viewModel.numberOfItems - 1)) }
             .distinctUntilChanged()
             .share()
         
-        sliderValue
-            .throttle(0.1, scheduler: MainScheduler.instance)
-            .bind(to: viewModel.currentIndex)
-            .disposed(by: bag)
+        bag.insert(
+            viewModel.currentIndex
+                .bind(onNext: indexChanged),
+            viewModel.onFinish
+                .bind(onNext: clearAndDismiss(result:)),
+            assetsChanged
+                .map { _ in }
+                .bind(onNext: reload),
+            assetsCount
+                .map { $0 < 2 }
+                .bind(to: removeButton.rx.isHidden),
+            assetsCount
+                .map { $0 < 2 }
+                .bind(to: cvStack.rx.isHidden),
+            assetsCount
+                .map { $0 < 30 }
+                .bind(to: slider.superview!.rx.isHidden),
+            sliderValue
+                .throttleMain(0.1)
+                .bind(to: viewModel.currentIndex),
+            sliderValue
+                .debounceMain(0.1)
+                .bind(onNext: indexChangedScroll),
+            removeButton.rx.tap
+                .delayMain(0.1)
+                .bind(onNext: viewModel.removeCurrentAsset),
+            cancelButton.rx.tap
+                .delayMain(0.1)
+                .bind(onNext: { self.viewModel.finish(.canceled) }),
+            confirmButton.rx.tap
+                .delayMain(0.1)
+                .bind(onNext: { self.viewModel.finish(.confirmed) }),
+            addMoreButton.rx.tap
+                .delayMain(0.1)
+                .bind(onNext: { self.viewModel.finish(.wantsMore) })
+        )
         
-        sliderValue
-            .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
-            .bind(onNext: indexChangedScroll)
-            .disposed(by: bag)
-        
-        cancelButton.rx.tap
-            .bind(onNext: { self.viewModel.finish(.canceled) })
-            .disposed(by: bag)
-        
-        confirmButton.rx.tap
-            .bind(onNext: { self.viewModel.finish(.confirmed) })
-            .disposed(by: bag)
-        
-        addMoreButton.rx.tap
-            .bind(onNext: { self.viewModel.finish(.wantsMore) })
-            .disposed(by: bag)
+        for button in [removeButton, cancelButton, confirmButton, addMoreButton] {
+            button?.rx.tap.bind(onNext: {
+                button?.animateShrinkGrow(duration: 0.2)
+            }).disposed(by: bag)
+        }
         
     }
     
@@ -225,12 +215,12 @@ class ReviewViewController: UIViewController {
     
     
     func reload() {
-        self.cv?.reloadData()
+        self.collectionView?.reloadData()
     }
     
     
     func setViews(hidden: Bool) {
-        [view].compactMapAs(UIView.self).forEach {
+        [view, cancelButton, confirmButton].compactMapAs(UIView.self).forEach {
             $0.transform = .init(scaleX: hidden ? 0.7 : 1.0, y: hidden ? 0.7 : 1.0)
             $0.alpha = hidden ? 0.0 : 1.0
         }
@@ -246,30 +236,18 @@ class ReviewViewController: UIViewController {
         setViews(hidden: true)
         UIView.animate(withDuration: 0.3,
                        delay: 0.0,
-                       usingSpringWithDamping: 0.9,
+                       usingSpringWithDamping: 0.8,
                        initialSpringVelocity: 0,
                        options: .curveEaseInOut,
                        animations: {
                         self.setViews(hidden: false)
         }, completion: nil)
         
-        
         titleLabel.text = viewModel.title(forLanguage: "en")
-        
-        if viewModel.is3d {
-            //mainStack.arrangedSubviews.forEach { $0.isHidden = true }
-            //imageView.isHidden = false
-            //confirmButton.isHidden = true
-        }
     }
     
     
-    // MARK: - Interaction
-    
-    var currentIndex: Int {
-        return viewModel.currentIndex.value
-    }
-    
+    // MARK: Interaction
     
     @objc
     func swipe(_ swipe: UISwipeGestureRecognizer) {
@@ -279,14 +257,11 @@ class ReviewViewController: UIViewController {
     
     
     func indexChangedScroll(newIndex: Int) {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.cv.scrollToItem(at: .init(row: newIndex, section: 0), at: .centeredHorizontally, animated: false)
-        })
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        print("Will disappear")
-        //UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: .curveEaseInOut, animations: { self.setViews(hidden: true) }, completion: nil)
+        UIView.animate(withDuration: 0.1) {
+            self.collectionView.scrollToItem(at: .init(row: newIndex, section: 0),
+                                             at: .centeredHorizontally,
+                                             animated: false)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -296,20 +271,19 @@ class ReviewViewController: UIViewController {
         }
     }
     
-    // MARK: - Interaction
-    
     @objc
     func cvTapped(tap: UITapGestureRecognizer) {
-        let location = tap.location(in: cv)
-        if let i = cv.indexPathForItem(at: location)/*, let cell = cv.cellForItem(at: i)*/{
-            viewModel.currentIndex.v = i.row
+        let location = tap.location(in: collectionView)
+        if let i = collectionView.indexPathForItem(at: location) {
+            viewModel.currentIndex.accept(i.row)
         }
     }
     
-    // MARK: - Layout
+    // MARK: Layout
     
+    /// Rearanges the slider according to screen width.
     func moveSliderIfNeeded() {
-        let cvContainer = cv.superview! // the container to be moved
+        let cvContainer = collectionView.superview! // the container to be moved
         let landscape = mainStack.frame.width > 400
         let isSeparate = mainStack.arrangedSubviews.contains(cvContainer)
         if landscape && isSeparate {
@@ -318,10 +292,13 @@ class ReviewViewController: UIViewController {
         }
         if !landscape && !isSeparate {
             cvContainer.removeFromSuperview()
-            let sliderI = mainStack.arrangedSubviews.enumerated().first(where: { $0.element === slider })?.offset
+            let sliderI = mainStack.arrangedSubviews
+                .enumerated()
+                .first(where: { $0.element === slider })?
+                .offset
             mainStack.insertArrangedSubview(cvContainer, at: (sliderI ?? 2) + 1)
         }
-        cv.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
         self.view.layoutIfNeeded()
     }
     
@@ -334,4 +311,27 @@ class ReviewViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+}
+
+// MARK: -
+
+
+extension ReviewViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.numberOfItems
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+        ) -> UICollectionViewCell {
+        let ivm = viewModel.itemCellViewModel(atIndex: indexPath.row)
+        ivm.fetchImage()
+        let cell = collectionView.dequeue(ItemCellView.self, for: indexPath)!
+        cell.configure(viewModel: ivm)
+        cell.imageView.layer.cornerRadius = 4.0
+        cell.shadow.layer.cornerRadius = 4.0
+        return cell
+    }
 }
