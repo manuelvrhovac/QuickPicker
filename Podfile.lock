@@ -1,4 +1,5 @@
 PODS:
+  - KVFetcher (0.9.1)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -7,21 +8,24 @@ PODS:
   - RxSwift (5.0.0)
 
 DEPENDENCIES:
+  - KVFetcher
   - RxCocoa
   - RxRelay
   - RxSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - KVFetcher
     - RxCocoa
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
+  KVFetcher: 849eb8e6f4412cc0b13c30b50344936bd0450597
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
-PODFILE CHECKSUM: 7453f01a5dbacf6abd7e97e43f32253974399429
+PODFILE CHECKSUM: 4a3e66d365ff54262779db45aebdddd559e15840
 
 COCOAPODS: 1.7.1

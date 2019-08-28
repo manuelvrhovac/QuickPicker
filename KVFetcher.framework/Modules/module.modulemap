@@ -1,0 +1,11 @@
+framework module KVFetcher {
+  umbrella header "KVFetcher.h"
+
+  export *
+  module * { export * }
+}
+
+module KVFetcher.Swift {
+    header "KVFetcher-Swift.h"
+    requires objc
+}

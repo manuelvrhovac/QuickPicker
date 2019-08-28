@@ -67,7 +67,7 @@ Use QuickPicker to pick single or multiple photos or videos.
    s.swift_versions = "4.2"
 
   #  When using multiple platforms
-   s.ios.deployment_target = "10.0"
+   s.ios.deployment_target = "10.3"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
@@ -106,6 +106,13 @@ Use QuickPicker to pick single or multiple photos or videos.
 
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
+
+  s.resources = "QuickPicker/UI/**/*.{storyboard,xib,xcassets,json,imageset,png}"
+  s.resource_bundles = {
+    'QuickPicker' => ['QuickPicker/**/*.{storyboard,xib,xcassets,json,imageset,png}']
+  }
+
+
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

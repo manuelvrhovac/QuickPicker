@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="500" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bLJ-Kg-9RP" userLabel="containerStack">
+                            <stackView opaque="NO" contentMode="scaleToFill" restorationIdentifier="container" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bLJ-Kg-9RP" userLabel="containerStack">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="800"/>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvr-SS-6b0" userLabel="toolbarContainer">
@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jII-aJ-Wfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-846" y="-846"/>
+            <point key="canvasLocation" x="-875" y="-846"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YZc-a1-5LD">

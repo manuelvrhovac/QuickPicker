@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C2995EB0704678DB02F8606 /* Pods_QuickPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0472ACC5DD132A8A3211423 /* Pods_QuickPicker.framework */; };
 		6429601E23145BCC00DB8D49 /* SmartLayoutCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6429601D23145BCC00DB8D49 /* SmartLayoutCollectionView.swift */; };
 		6429602023145EC700DB8D49 /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6429601F23145EC700DB8D49 /* HUDView.swift */; };
 		64296068231593E700DB8D49 /* Ext+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64296066231593E300DB8D49 /* Ext+Foundation.swift */; };
@@ -38,18 +39,9 @@
 		64325A31225DF13700205020 /* TabKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A09225DF13700205020 /* TabKind.swift */; };
 		64325A32225DF13700205020 /* CollectionViewSwiper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A0B225DF13700205020 /* CollectionViewSwiper.swift */; };
 		64325A34225DF13700205020 /* SmartLayoutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A0D225DF13700205020 /* SmartLayoutProtocol.swift */; };
-		64325A51225E98B200205020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64325A50225E98B200205020 /* Assets.xcassets */; };
 		64325A53225EA17A00205020 /* Ext+QuickPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A52225EA17A00205020 /* Ext+QuickPicker.swift */; };
 		64325A59226391BE00205020 /* KeyAssetFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A58226391BE00205020 /* KeyAssetFetcher.swift */; };
 		64325A612264A9FE00205020 /* AlbumCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64325A602264A9FE00205020 /* AlbumCellViewModel.swift */; };
-		6448556022A6BC5B00211FAE /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6448555C22A6BC5B00211FAE /* RxTest.framework */; };
-		6448556122A6BC5B00211FAE /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6448555D22A6BC5B00211FAE /* RxBlocking.framework */; };
-		6448556222A6BC5B00211FAE /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6448555E22A6BC5B00211FAE /* RxRelay.framework */; };
-		6448556322A6BC5B00211FAE /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6448555F22A6BC5B00211FAE /* RxSwift.framework */; };
-		6448556422A6BC6500211FAE /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6448555D22A6BC5B00211FAE /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6448556522A6BC6500211FAE /* RxRelay.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6448555E22A6BC5B00211FAE /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6448556622A6BC6600211FAE /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6448555F22A6BC5B00211FAE /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6448556722A6BC6600211FAE /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6448555C22A6BC5B00211FAE /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		645125062272FDF800BB5259 /* DefaultCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645125052272FDF800BB5259 /* DefaultCellProtocol.swift */; };
 		648138A522A86D1900DB3021 /* QPImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259EC225DF13700205020 /* QPImageFetcher.swift */; };
 		648138A622A86D1900DB3021 /* QPImageCacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259F0225DF13700205020 /* QPImageCacher.swift */; };
@@ -59,13 +51,9 @@
 		648D184A226B2B8600983CA0 /* ReviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 648D1849226B2B8600983CA0 /* ReviewViewController.storyboard */; };
 		6491D744226F14D900F002F8 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491D743226F14D900F002F8 /* ItemViewModel.swift */; };
 		6491D746226F159900F002F8 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491D745226F159800F002F8 /* ItemView.swift */; };
+		64AD079D23166827002BC0A6 /* QPAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64AD079C23166827002BC0A6 /* QPAssets.xcassets */; };
 		64BA9532226B5CE400AF2CE0 /* Ext+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA9531226B5CE400AF2CE0 /* Ext+RxSwift.swift */; };
-		64C07E8622A6C88F00A6FF2A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C07E8522A6C88F00A6FF2A /* RxCocoa.framework */; };
-		64C07E8722A6C89400A6FF2A /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64C07E8522A6C88F00A6FF2A /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64C07E9222A7B7C000A6FF2A /* ImageBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C07E9122A7B7C000A6FF2A /* ImageBarButtonItem.swift */; };
-		64CF3AEF22A91C2C00871ACE /* KVFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CF3AEE22A91C2C00871ACE /* KVFetcher.framework */; };
-		64CF3B0622A91D6F00871ACE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CF3B0522A91D6F00871ACE /* SwiftyJSON.framework */; };
-		64CF3B1A22A91E8600871ACE /* KVFetcher.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 64CF3AEE22A91C2C00871ACE /* KVFetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64CF3B1E22A9212200871ACE /* QuickPicker.framework in Export Framework (copy files) */ = {isa = PBXBuildFile; fileRef = 643259C3225DF12A00205020 /* QuickPicker.framework */; };
 		64E16A1A22B1812D00A6DB18 /* SelectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E16A1922B1812D00A6DB18 /* SelectionMode.swift */; };
 		64E16A1C22B1816000A6DB18 /* QPPAllowedMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E16A1B22B1816000A6DB18 /* QPPAllowedMedia.swift */; };
@@ -108,19 +96,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				64CF3B1A22A91E8600871ACE /* KVFetcher.framework in CopyFiles */,
-				6448556422A6BC6500211FAE /* RxBlocking.framework in CopyFiles */,
-				6448556522A6BC6500211FAE /* RxRelay.framework in CopyFiles */,
-				6448556622A6BC6600211FAE /* RxSwift.framework in CopyFiles */,
-				64C07E8722A6C89400A6FF2A /* RxCocoa.framework in CopyFiles */,
-				6448556722A6BC6600211FAE /* RxTest.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		05451470E57EFE957738F8F6 /* Pods-QuickPicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicker.release.xcconfig"; path = "Target Support Files/Pods-QuickPicker/Pods-QuickPicker.release.xcconfig"; sourceTree = "<group>"; };
+		30D86CCB15BF3D7372407A70 /* Pods-QuickPicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicker.release.xcconfig"; path = "Target Support Files/Pods-QuickPicker/Pods-QuickPicker.release.xcconfig"; sourceTree = "<group>"; };
 		6429601D23145BCC00DB8D49 /* SmartLayoutCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartLayoutCollectionView.swift; sourceTree = "<group>"; };
 		6429601F23145EC700DB8D49 /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
 		642960582315934600DB8D49 /* Ext+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Ext+String.swift"; path = "../../../../../../LocalFolder/SwiftExtensions/Ext+String.swift"; sourceTree = "<group>"; };
@@ -162,14 +144,9 @@
 		64325A09225DF13700205020 /* TabKind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabKind.swift; sourceTree = "<group>"; };
 		64325A0B225DF13700205020 /* CollectionViewSwiper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSwiper.swift; sourceTree = "<group>"; };
 		64325A0D225DF13700205020 /* SmartLayoutProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartLayoutProtocol.swift; sourceTree = "<group>"; };
-		64325A50225E98B200205020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64325A52225EA17A00205020 /* Ext+QuickPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+QuickPicker.swift"; sourceTree = "<group>"; };
 		64325A58226391BE00205020 /* KeyAssetFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAssetFetcher.swift; sourceTree = "<group>"; };
 		64325A602264A9FE00205020 /* AlbumCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCellViewModel.swift; sourceTree = "<group>"; };
-		6448555C22A6BC5B00211FAE /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
-		6448555D22A6BC5B00211FAE /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
-		6448555E22A6BC5B00211FAE /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
-		6448555F22A6BC5B00211FAE /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		645125052272FDF800BB5259 /* DefaultCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCellProtocol.swift; sourceTree = "<group>"; };
 		648A8B0A22A1200400444853 /* QPToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QPToolbarView.xib; sourceTree = "<group>"; };
 		648A8B0C22A1222300444853 /* QPToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPToolbarView.swift; sourceTree = "<group>"; };
@@ -177,15 +154,14 @@
 		648D1849226B2B8600983CA0 /* ReviewViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ReviewViewController.storyboard; sourceTree = "<group>"; };
 		6491D743226F14D900F002F8 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		6491D745226F159800F002F8 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		64AD079C23166827002BC0A6 /* QPAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = QPAssets.xcassets; path = QuickPicker/UI/QPAssets.xcassets; sourceTree = SOURCE_ROOT; };
 		64BA9531226B5CE400AF2CE0 /* Ext+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+RxSwift.swift"; sourceTree = "<group>"; };
-		64C07E8522A6C88F00A6FF2A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		64C07E9122A7B7C000A6FF2A /* ImageBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageBarButtonItem.swift; path = ../../Classes/ImageBarButtonItem.swift; sourceTree = "<group>"; };
 		64CF3AEC22A91BF600871ACE /* QuickPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuickPicker.framework; sourceTree = "<group>"; };
-		64CF3AEE22A91C2C00871ACE /* KVFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KVFetcher.framework; path = ../KVFetcher/KVFetcher.framework; sourceTree = "<group>"; };
-		64CF3B0522A91D6F00871ACE /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		64E16A1922B1812D00A6DB18 /* SelectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMode.swift; sourceTree = "<group>"; };
 		64E16A1B22B1816000A6DB18 /* QPPAllowedMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPPAllowedMedia.swift; sourceTree = "<group>"; };
-		F83EB0990AA86602E74186DA /* Pods-QuickPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicker.debug.xcconfig"; path = "Target Support Files/Pods-QuickPicker/Pods-QuickPicker.debug.xcconfig"; sourceTree = "<group>"; };
+		B0472ACC5DD132A8A3211423 /* Pods_QuickPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF290FA20DCA28CA6CB9CE6E /* Pods-QuickPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPicker.debug.xcconfig"; path = "Target Support Files/Pods-QuickPicker/Pods-QuickPicker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,13 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64C07E8622A6C88F00A6FF2A /* RxCocoa.framework in Frameworks */,
-				64CF3AEF22A91C2C00871ACE /* KVFetcher.framework in Frameworks */,
-				6448556322A6BC5B00211FAE /* RxSwift.framework in Frameworks */,
-				6448556022A6BC5B00211FAE /* RxTest.framework in Frameworks */,
-				64CF3B0622A91D6F00871ACE /* SwiftyJSON.framework in Frameworks */,
-				6448556122A6BC5B00211FAE /* RxBlocking.framework in Frameworks */,
-				6448556222A6BC5B00211FAE /* RxRelay.framework in Frameworks */,
+				5C2995EB0704678DB02F8606 /* Pods_QuickPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,20 +184,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		251A379FB37777B4100144A4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				64CF3B0522A91D6F00871ACE /* SwiftyJSON.framework */,
-				64CF3AEE22A91C2C00871ACE /* KVFetcher.framework */,
-				64C07E8522A6C88F00A6FF2A /* RxCocoa.framework */,
-				6448555D22A6BC5B00211FAE /* RxBlocking.framework */,
-				6448555E22A6BC5B00211FAE /* RxRelay.framework */,
-				6448555F22A6BC5B00211FAE /* RxSwift.framework */,
-				6448555C22A6BC5B00211FAE /* RxTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		64296025231554EB00DB8D49 /* Other Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,8 +292,8 @@
 				643259C5225DF12A00205020 /* QuickPicker */,
 				643259D0225DF12A00205020 /* QuickPickerTests */,
 				643259C4225DF12A00205020 /* Products */,
-				251A379FB37777B4100144A4 /* Frameworks */,
 				845546173A2260F0DC850E3C /* Pods */,
+				E52B631193995D7C98A35C20 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,7 +314,6 @@
 				643259EA225DF13700205020 /* Fetchers */,
 				643259DE225DF13700205020 /* UI */,
 				64296025231554EB00DB8D49 /* Other Classes */,
-				64325A50225E98B200205020 /* Assets.xcassets */,
 				643259C6225DF12A00205020 /* QuickPicker.h */,
 				643259C7225DF12A00205020 /* Info.plist */,
 				6429607523159D5B00DB8D49 /* README.md */,
@@ -379,6 +334,7 @@
 		643259DE225DF13700205020 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				64AD079C23166827002BC0A6 /* QPAssets.xcassets */,
 				642DBB582264D0FA00B9EC4E /* QuickPicker */,
 				64C07E8F22A7B4EE00A6FF2A /* Toolbar */,
 				642DBB7B2265EE9800B9EC4E /* Review */,
@@ -440,10 +396,18 @@
 		845546173A2260F0DC850E3C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F83EB0990AA86602E74186DA /* Pods-QuickPicker.debug.xcconfig */,
-				05451470E57EFE957738F8F6 /* Pods-QuickPicker.release.xcconfig */,
+				FF290FA20DCA28CA6CB9CE6E /* Pods-QuickPicker.debug.xcconfig */,
+				30D86CCB15BF3D7372407A70 /* Pods-QuickPicker.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E52B631193995D7C98A35C20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0472ACC5DD132A8A3211423 /* Pods_QuickPicker.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,7 +428,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 643259D7225DF12A00205020 /* Build configuration list for PBXNativeTarget "QuickPicker" */;
 			buildPhases = (
-				11A13F335CCF0B20EE695049 /* [CP] Check Pods Manifest.lock */,
+				DA46762871F5A1E3E483916B /* [CP] Check Pods Manifest.lock */,
 				643259BE225DF12A00205020 /* Headers */,
 				643259BF225DF12A00205020 /* Sources */,
 				64E169E522B1004000A6DB18 /* STORYBOARD_CHECK */,
@@ -546,8 +510,8 @@
 				64325A0F225DF13700205020 /* ItemCellView.xib in Resources */,
 				6429607823159DDD00DB8D49 /* QuickPicker.podspec in Resources */,
 				642960722315995F00DB8D49 /* .gitignore in Resources */,
-				64325A51225E98B200205020 /* Assets.xcassets in Resources */,
 				64325A15225DF13700205020 /* AlbumCellView.xib in Resources */,
+				64AD079D23166827002BC0A6 /* QPAssets.xcassets in Resources */,
 				6429607423159D4F00DB8D49 /* LICENSE.md in Resources */,
 				648D184A226B2B8600983CA0 /* ReviewViewController.storyboard in Resources */,
 				6429607623159D5B00DB8D49 /* README.md in Resources */,
@@ -566,28 +530,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11A13F335CCF0B20EE695049 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QuickPicker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6481389F22A7FCFD00DB3021 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -622,6 +564,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/env xcrun --sdk macosx swift";
 			shellScript = "//#  STORYBOARD_CHECKER\n//#  Created by Manuel Vrhovac\n//#  A script that discovers all the .storyboard files and then goes through your .swift\n//#  files to find UIStoryboard initializations with non-existing storyboard name.\n//#  1. Add a new Build Phase (Run Script Phase)\n//#  2. Change shell to '/usr/bin/env xcrun --sdk macosx swift'\n//#  3. Copy this code in the text field below it.\n//#  4. Change 'projectPath' and 'between' variables inside the code!\n\nimport Foundation\n\n// #Change this to true if you want to ignore wrongly referenced storyboards:\nlet justWarn: Bool = true\n\n// #Change this to your project path to check for .swift and .storyboard files. You can just drag a folder from the sidebar here.\nlet projectPath: String = \"/Users/Manuel 1/Documents/Development 2019/QuickPicker/QuickPicker/\"\n\n// #List here what methods to look for:\nlet between: [(String, String)] = [\n    (\"UIStoryboard.instantiateVC(\", \".self\"),\n    (\"UIStoryboard(type: \", \".self\"),\n    (\".instantiateViewController(withIdentifier: \\\"\", \"\\\"\")\n]\n\n\ntypealias Tup = (String, String, Int, String)\npublic extension String {\n    func containsAny(_ list: [String]) -> Bool {\n        for string in list where self.contains(string) {\n            return true\n        }\n        return false\n    }\n}\n\n// # Measure time for this build phase:\nlet startDate = Date()\n\n// # Fetch all the file paths in the folder:\nlet enumerator = FileManager.default.enumerator(atPath: projectPath)\nvar paths = [String]()\nwhile let filename = enumerator?.nextObject() as? String {\n    paths.append(projectPath + filename)\n}\n\n// # Filter out storyboard filenames (just name)\nlet storyboardFilenames = paths\n    .filter{ $0.hasSuffix(\".storyboard\") }\n    .compactMap{ $0.components(separatedBy: \"/\").last }\n\n/// Name of class - path - line number\nvar foundTuples: [Tup] = []\nvar missingTuples: [Tup] = []\n\nfor path in paths where path.hasSuffix(\".swift\") {\n    guard let source = try? String(contentsOfFile: path) else { continue }\n    guard source.containsAny(between.map { $0.0 }) else { continue }\n    for (lineNumber, line) in source.components(separatedBy: \"\\n\").enumerated() {\n        for (start, end) in between {\n            guard line.contains(start) else { continue }\n            let shortPath = path.components(separatedBy: projectPath)[1]\n            let occurence = line.components(separatedBy: start)[1].components(separatedBy: end)[0]\n            let tuple = (occurence, shortPath, lineNumber, line)\n            if storyboardFilenames.contains(occurence + \".storyboard\") {\n                foundTuples.append(tuple)\n            } else {\n                missingTuples.append(tuple)\n            }\n        }\n    }\n}\n\nlet msElapsed = Int(Date().timeIntervalSince(startDate)*1000.0)\n\nif missingTuples.isEmpty {\n    print(\"\\n🖼 ✅ STORYBOARD_CHECK: OK (time=\\(msElapsed)ms)\")\n    exit(0)\n} else {\n    print(\"\\n🖼 ❌ STORYBOARD_CHECK: FAILED (time=\\(msElapsed)ms)\")\n    var index = 1\n    for (occurence, shortPath, lineNumber, line) in missingTuples {\n        print(\"⚠️ (\\(index)) Missing '\\(occurence).storyboard' in 📕 '\\(shortPath)' at line \\(lineNumber):\")\n        print(\" -> \", line)\n        index += 1\n    }\n    print(\"\\n\")\n    exit(justWarn ? 0 : 1)\n}\n\n\n\n\n\n";
+		};
+		DA46762871F5A1E3E483916B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickPicker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -811,7 +775,7 @@
 		};
 		643259D8225DF12A00205020 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F83EB0990AA86602E74186DA /* Pods-QuickPicker.debug.xcconfig */;
+			baseConfigurationReference = FF290FA20DCA28CA6CB9CE6E /* Pods-QuickPicker.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -823,8 +787,9 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickPicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -834,19 +799,20 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.manvrh.QuickPicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386";
 			};
 			name = Debug;
 		};
 		643259D9225DF12A00205020 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05451470E57EFE957738F8F6 /* Pods-QuickPicker.release.xcconfig */;
+			baseConfigurationReference = 30D86CCB15BF3D7372407A70 /* Pods-QuickPicker.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -858,8 +824,9 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickPicker/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -869,13 +836,14 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.manvrh.QuickPicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386";
 			};
 			name = Release;
 		};
