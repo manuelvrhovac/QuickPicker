@@ -289,6 +289,8 @@
 				642960712315995F00DB8D49 /* .gitignore */,
 				64CF3AEC22A91BF600871ACE /* QuickPicker.framework */,
 				6429607723159DDD00DB8D49 /* QuickPicker.podspec */,
+				6429607523159D5B00DB8D49 /* README.md */,
+				6429607323159D4F00DB8D49 /* LICENSE.md */,
 				643259C5225DF12A00205020 /* QuickPicker */,
 				643259D0225DF12A00205020 /* QuickPickerTests */,
 				643259C4225DF12A00205020 /* Products */,
@@ -316,8 +318,6 @@
 				64296025231554EB00DB8D49 /* Other Classes */,
 				643259C6225DF12A00205020 /* QuickPicker.h */,
 				643259C7225DF12A00205020 /* Info.plist */,
-				6429607523159D5B00DB8D49 /* README.md */,
-				6429607323159D4F00DB8D49 /* LICENSE.md */,
 			);
 			path = QuickPicker;
 			sourceTree = "<group>";
