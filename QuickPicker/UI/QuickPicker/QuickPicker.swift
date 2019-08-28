@@ -8,20 +8,45 @@ import Photos
 import RxSwift
 import RxCocoa
 
-/// ViewController used to display QuickPicker. Use 'initFromSB(viewModel:)' to initialize. Call 'present' method on current view controller to display the quick picker. See 'QuickPickerViewModel' for more.
-public class QuickPickerViewController: UIViewController {
+/// ViewController used to display QuickPicker. Use 'initFromSB(viewModel:)' to initialize. Call 'present' method on current view controller to display the quick picker. See 'QuickPicker.ViewModel' for more.
+/// - **config**: Contains configuration options like selection mode, limit, type of selection etc.
+/// - **delegate**: Delegate with methods that execute when user has canceled or finished picking assets.
+/// - **completion**: A completion block that executes when user has canceled or finished picking assets.
+///
+/// **Note**: You may leave 'completion' as nil if you plan to use delegate
+public class QuickPicker: UIViewController {
     
-    // MARK: - IBOutlets
+    // MARK: - UI Properties
     
-    @IBOutlet private weak var containerStack: UIStackView!
-    @IBOutlet private(set) weak var toolbarContainerStack: UIView!
-
-    // MARK: - Properties
+    private var containerStack: UIStackView!
+    private var toolbarContainerStack: UIView!
+    
+    // MARK: - Public Properties
+    
+    /// Contains configuration options like selection mode, limit, type of selection etc.
+    public var config: Config {
+        set {
+            viewModel.config = newValue
+        }
+        get {
+            return viewModel.config
+        }
+    }
+    
+    /// A completion block that executes when user has canceled or finished picking assets.
+    public var completion: Completion?
+    
+    /// Delegate with methods that execute when user has canceled or finished picking assets.
+    public weak var delegate: QuickPickerDelegate?
+    
+    
+    // MARK: Private
     
     private var navigationControllers = [TabKind: CTNavigationController]()
-    weak var viewModel: QuickPickerViewModel!
-    var bag: DisposeBag = .init()
-    var toolbar: QPToolbarView!
+    private var viewModel: QuickPicker.ViewModel!
+    private var bag: DisposeBag = .init()
+    private var toolbar: QPToolbarView!
+    
     
     // MARK: Calculated
     
@@ -31,7 +56,7 @@ public class QuickPickerViewController: UIViewController {
             .compactMap { $0.view as? ItemView }
     }
     
-    private var selectedNavigationController: CTNavigationController {
+    var selectedNavigationController: CTNavigationController {
         return navigationControllers[viewModel.selectedTabKind.value]!
     }
     
@@ -42,22 +67,52 @@ public class QuickPickerViewController: UIViewController {
     
     // MARK: - Initialization
     
-    /// Default init method using viewModel.
-    public static func initFromSB(viewModel: QuickPickerViewModel) -> QuickPickerViewController {
-        let qp: QuickPickerViewController! = UIStoryboard.instantiateVC(QuickPickerViewController.self)
-        qp.viewModel = viewModel
-        return qp
+    /// Default init method for QuickPicker.
+    /// - parameter config: Contains configuration options like selection mode, limit, type of selection etc.
+    /// - parameter preselected: Assets that should be already selected when picker shows up
+    /// - parameter completion: A completion block that will execute when user has canceled or finished picking assets.
+    ///
+    /// **Note**: You may leave 'completion' as nil if you plan to use delegate
+    public init(configuration: Config, preselected: [PHAsset]?, completion: Completion?) {
+        self.viewModel = .init(config: configuration, preselected: preselected)
+        self.completion = completion
+        super.init(nibName: nil, bundle: nil)
     }
     
+    internal init(viewModel: QuickPicker.ViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: bundle)
+    }
+    
+    internal required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     // MARK: - ViewController Lifecycle
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.tintColor = viewModel.tintColor
+        containerStack = .init(frame: .zero)
+        containerStack.translatesAutoresizingMaskIntoConstraints = false
+        containerStack.distribution = .fillEqually
+        containerStack.axis = .vertical
+        view.addSubview(containerStack)
+        containerStack.snapToSuperview()
         
-        for kind in viewModel.tabKinds {
+        toolbarContainerStack = .init(frame: .zero)
+        toolbarContainerStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toolbarContainerStack)
+        
+        NSLayoutConstraint.activate([
+            toolbarContainerStack.leadingAnchor.constraint(equalTo: containerStack.leadingAnchor),
+            toolbarContainerStack.trailingAnchor.constraint(equalTo: containerStack.trailingAnchor),
+            toolbarContainerStack.bottomAnchor.constraint(equalTo: containerStack.bottomAnchor)
+        ])
+        
+        self.view.tintColor = viewModel.config.tintColor
+        
+        for kind in viewModel.config.tabKinds {
             let tabViewModel = viewModel.tabViewModel(for: kind)!
             let vc: UIViewController = createAndBindTabViewController(tabModel: tabViewModel)
             let nc = CTNavigationController(customToolbarView: nil, rootViewController: vc)
@@ -70,7 +125,7 @@ public class QuickPickerViewController: UIViewController {
         
         let toolbarViewModel = QPToolbarViewModel(quickPickerViewModel: viewModel)
         toolbar = QPToolbarView.initFromNib(viewModel: toolbarViewModel)
-        toolbar.qpm = viewModel
+        toolbar.quickPickerViewModel = viewModel
         toolbarContainerStack.addSubview(toolbar)
         toolbar.snapToSuperview()
         setupBindings()
@@ -83,32 +138,50 @@ public class QuickPickerViewController: UIViewController {
     
     func setupBindings() {
         bag.insert(
-            viewModel.itemViewModels.bind(onNext: { ivms in
-                guard let itemViewModel = ivms.last else { return }
-                let vc = self.createAndBindTabViewController(tabModel: itemViewModel)
-                self.selectedNavigationController.pushViewController(vc, animated: true)
-            }),
-            viewModel.reviewViewModel.bind(onNext: { rvm in
-                guard let rvm = rvm else { return }
-                let rvc = ReviewViewController.initi(viewModel: rvm)
-                self.present(rvc, animated: false, completion: nil)
-            }),
             viewModel.userError
-                .bind(onNext: displayUserError),
-            viewModel.onFinish
-                .map { _ in }
-                .bind(onNext: clear),
+                .bind(onNext: displayUserError(_:)),
             viewModel.selectedTabKind
                 .bind(onNext: changeTab(to:)),
+            viewModel.itemViewModel
+                .bind(onNext: push(itemViewModel:)),
+            viewModel.reviewViewModel
+                .bind(onNext: present(reviewViewModel:)),
+            viewModel.onFinish
+                .bind(onNext: finish(result:)),
             viewModel.onUndo
-                .bind(onNext: undoPressed(flag:))
+                .bind(onNext: showUndoHUD(flag:))
         )
         
-        viewModel.selectedTabKind
-            .accept(viewModel.tabKinds.first!)
+        if let firstTab = viewModel.config.tabKinds.first {
+            viewModel.selectedTabKind.accept(firstTab)
+        }
     }
     
-    /// Created for each tab, each of them has a cancel (x) button. May be single collection tab or collection group tab.
+    func push(itemViewModel: ItemViewModel?) {
+        guard let itemViewModel = itemViewModel else { return }
+        let vc = createAndBindTabViewController(tabModel: itemViewModel)
+        selectedNavigationController.pushViewController(vc, animated: true)
+    }
+    
+    func present(reviewViewModel: ReviewViewModel?) {
+        guard let reviewViewModel = reviewViewModel else { return }
+        let reviewViewController = ReviewViewController.initi(viewModel: reviewViewModel)
+        self.present(reviewViewController, animated: false, completion: nil)
+    }
+    
+    func finish(result: Result) {
+        completion?(self, result)
+        switch result {
+        case .canceled:
+            print("Canceled")
+            delegate?.quickPickerDidCancel()
+        case .finished(let assets):
+            print("Got \(assets.count) assets")
+            delegate?.quickPicker(didFinishPickingAssets: assets)
+        }
+    }
+    
+    /// Convenience method. Created for each tab, each of them has a cancel (x) button. May be single collection tab or collection group tab.
     func createAndBindTabViewController(tabModel: TabViewModel) -> UIViewController {
         let vc = UIViewController(nibName: nil, bundle: nil)
         
@@ -123,7 +196,7 @@ public class QuickPickerViewController: UIViewController {
             let itemView = ItemView(viewModel: ivm)
             vc.view = itemView
             vc.title = ivm.title
-            if viewModel.selectionMode != .single {
+            if viewModel.config.selectionMode != .single {
                 vc.navigationItem.addRightBarButtonItem(itemView.selectAllBarButtonItem)
             }
         case let avm as AlbumViewModel:
@@ -137,12 +210,8 @@ public class QuickPickerViewController: UIViewController {
     
     // MARK: Interaction
     
-    func clear() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func undoPressed(flag: Bool) {
-        guard viewModel.selectionMode != .single else { return } // no undo if single
+    func showUndoHUD(flag: Bool) {
+        guard viewModel.config.selectionMode != .single else { return } // no undo if single
         guard !viewModel.selectionStack.value.isEmpty else { return }
         view.viewWithRestorationIdentifier("hud")?.removeFromSuperview()
         let hud = HUDView(size: 160.0, text: "⃔", fontSize: 90.0)
@@ -159,6 +228,10 @@ public class QuickPickerViewController: UIViewController {
         
         // Migrate toolbar to this navigation controller:
         nc.customToolbarView = toolbar
+        nc.view.layoutSubviews()
+        delay(1.0) {
+            nc.view.layoutSubviews()
+        }
     }
     
     public override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -199,25 +272,15 @@ public class QuickPickerViewController: UIViewController {
     
     @objc
     func applicationDidBecomeActive() {
-        checkForDeletedAssetsFromUndoStack()
+        viewModel.checkForDeletedAssetsFromUndoStack()
         allItemViews.forEach { $0.viewModel.reloadCollection() }
     }
     
     
-    /// Gets called when user reenters the app and checks for deleted photos/videos.
-    func checkForDeletedAssetsFromUndoStack() {
-        var allAssets = Set<PHAsset>()
-        let selections = viewModel.selectionStack.value
-        selections.forEach { allAssets.formUnion($0) }
-        let deletedAssets = PHAsset.findMissingAssets(in: Array(allAssets))
-        guard !deletedAssets.isEmpty else { return }
-        let clearedSelections = selections.map { $0.subtracting(deletedAssets) }
-        viewModel.selectionStack.accept(clearedSelections)
-    }
     
     
     private func displayOverLimitMessage() {
-        guard case .multiple(let max) = viewModel.selectionMode else { return }
+        guard case .multiple(let max) = viewModel.config.selectionMode else { return }
         let alert = UIAlertController(title: "Maximum \(max) items", message: "You have selected more items than allowed", preferredStyle: .alert)
         alert.addAction(.init(title: "OK", style: .default, handler: nil))
         mainThread {
@@ -225,4 +288,26 @@ public class QuickPickerViewController: UIViewController {
         }
     }
     
+}
+
+
+
+
+public extension QuickPicker {
+    
+    // Result used in Completion Handler
+    enum Result {
+        case canceled
+        case finished(assets: [PHAsset])
+    }
+    
+    typealias Completion = (QuickPicker, Result) -> Void
+    
+}
+
+
+public protocol QuickPickerDelegate: class {
+    
+    func quickPicker(/*_ imagePicker: QuickPicker, */didFinishPickingAssets assets: [PHAsset])
+    func quickPickerDidCancel(/*_ imagePicker: QuickPicker*/)
 }

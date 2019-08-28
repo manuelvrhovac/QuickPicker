@@ -2,7 +2,6 @@
 //  Created by Manuel Vrhovac on 10/04/2019.
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
-// swiftlint:disable all
 
 import Foundation
 
@@ -20,6 +19,18 @@ public extension UIImage {
     
     var template: UIImage {
         return self.withRenderingMode(.alwaysTemplate)
+    }
+    
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(width: self.size.width + insets.left + insets.right,
+                   height: self.size.height + insets.top + insets.bottom), false, self.scale)
+        let _ = UIGraphicsGetCurrentContext()
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.draw(at: origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageWithInsets
     }
     
     
@@ -197,7 +208,7 @@ extension UIView {
         let distances = Dictionary(uniqueKeysWithValues: zip(NSLayoutConstraint.Attribute.allSides, constants))
         let snappedDistances = Dictionary.init(uniqueKeysWithValues: distances.filter { $0.key != side.opposite})
         snapTo(view: view, distances: snappedDistances)
-        if constant != nil { // add width or height
+        if let constant = constant { // add width or height
             let widthOrHeightAttribute = side.sizeAttribute
             self.addConstraint(NSLayoutConstraint(
                 item: self,
@@ -206,7 +217,7 @@ extension UIView {
                 toItem: nil,
                 attribute: widthOrHeightAttribute,
                 multiplier: 1.0,
-                constant: constant!
+                constant: constant
             ))
         }
     }

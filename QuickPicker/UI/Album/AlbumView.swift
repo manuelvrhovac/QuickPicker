@@ -73,6 +73,7 @@ extension AlbumView: UICollectionViewDataSource {
     }
 }
 
+
 extension AlbumView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

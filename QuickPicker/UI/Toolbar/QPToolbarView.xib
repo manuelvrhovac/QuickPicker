@@ -111,7 +111,7 @@
                     <edgeInsets key="layoutMargins" top="6" left="6" bottom="6" right="6"/>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ei2-Aq-gFs" userLabel="centerStack">
-                    <rect key="frame" x="203" y="79" width="260" height="34"/>
+                    <rect key="frame" x="203" y="75" width="260" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="260" id="ZwO-hb-1NR"/>
                     </constraints>
@@ -125,9 +125,9 @@
                 <constraint firstItem="zGQ-T7-uPw" firstAttribute="bottom" secondItem="fON-bP-cDM" secondAttribute="bottom" id="5kb-3c-NG7"/>
                 <constraint firstItem="zGQ-T7-uPw" firstAttribute="trailing" secondItem="fON-bP-cDM" secondAttribute="trailing" constant="-1" id="DZE-ao-XEk"/>
                 <constraint firstItem="jL1-Xf-G2c" firstAttribute="trailing" secondItem="k0x-nG-47n" secondAttribute="trailing" id="GMP-SH-kkX"/>
-                <constraint firstAttribute="bottom" secondItem="ei2-Aq-gFs" secondAttribute="bottom" id="HLn-vF-vM5"/>
+                <constraint firstAttribute="bottom" secondItem="ei2-Aq-gFs" secondAttribute="bottom" constant="4" id="HLn-vF-vM5"/>
                 <constraint firstItem="jL1-Xf-G2c" firstAttribute="top" secondItem="CAc-Z0-axs" secondAttribute="top" constant="-4" id="HOx-Cr-4eQ"/>
-                <constraint firstItem="ei2-Aq-gFs" firstAttribute="height" secondItem="CAc-Z0-axs" secondAttribute="height" id="IDE-NN-enc"/>
+                <constraint firstItem="ei2-Aq-gFs" firstAttribute="height" secondItem="07j-d8-MYR" secondAttribute="height" id="Kbh-FM-pBc"/>
                 <constraint firstItem="ei2-Aq-gFs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LIv-68-mHl"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qWZ-6Z-DX0" secondAttribute="trailing" id="N3L-QY-GbY"/>
                 <constraint firstItem="15D-Ta-Llm" firstAttribute="bottom" secondItem="sB3-Mo-Olu" secondAttribute="bottom" id="QLd-Pk-eOA"/>
@@ -171,10 +171,10 @@
         <image name="playButtonFill" width="117" height="117"/>
         <image name="playButtonSkeleton" width="117" height="117"/>
         <image name="rainbow" width="413" height="62.5"/>
-        <image name="segment-cloud" width="60" height="60"/>
-        <image name="segment-myAlbums" width="60" height="60"/>
-        <image name="segment-recent" width="60" height="60"/>
-        <image name="segment-smart" width="60" height="60"/>
+        <image name="segment-cloud" width="76.5" height="76.5"/>
+        <image name="segment-myAlbums" width="85.5" height="85.5"/>
+        <image name="segment-recent" width="90" height="90"/>
+        <image name="segment-smart" width="76.5" height="76.5"/>
         <image name="shadow" width="50" height="128"/>
     </resources>
 </document>

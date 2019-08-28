@@ -11,7 +11,6 @@ class QPToolbarView: UIView {
     
     static let defaultTabKinds: [TabKind] = [.recentlyAdded, .favorites, .groupRegular, .groupShared, .groupSmart]
     
-    
     @IBOutlet private(set) weak var proceedButtonFill: UIButton!
     @IBOutlet private(set) weak var blur: UIVisualEffectView!
     @IBOutlet private(set) weak var mainStack: UIStackView!
@@ -30,7 +29,7 @@ class QPToolbarView: UIView {
     
     var view: UIView { return self }
     var viewModel: QPToolbarViewModel!
-    var qpm: QuickPickerViewModel!
+    var quickPickerViewModel: QuickPicker.ViewModel!
     var bag = DisposeBag()
     
     let invisibleStack = UIStackView()
@@ -45,7 +44,7 @@ class QPToolbarView: UIView {
         switch view.frame.width {
         case 000 ..< 550: return fullWidthSegmentStack
         case 550 ..< 750: return buttonsAndInfoStack
-        default: return centerStack
+        default: return /*centerStack*/ buttonsAndInfoStack
         }
     }
     
@@ -60,11 +59,9 @@ class QPToolbarView: UIView {
     
     override func didMoveToWindow() {
         segment.removeAllSegments()
-        for kind in qpm.tabKinds {
+        for kind in quickPickerViewModel.config.tabKinds {
             segment.addSegment(with: kind.image, animated: false)
-            if kind.isSingle {
-                segment.segmentImageViews.last?.transform = .init(scaleX: 0.8, y: 0.8)
-            }
+            
         }
         
         setupBindings()
@@ -80,6 +77,10 @@ class QPToolbarView: UIView {
         proceedButtonFill.tintColor = tintColor
         
         moveSegmentIfNeeded()
+        
+        for item in self.segment.segmentImageViews {
+            item.image = item.image?.imageWithInsets(insets: .init(top: 5, left: 5, bottom: 5, right: 5))
+        }
     }
     
     func setupBindings() {
@@ -90,23 +91,23 @@ class QPToolbarView: UIView {
                 .bind(onNext: {
                     self.proceedButton?.animateShrinkGrow(duration: 0.2)
                     self.proceedButtonFill?.animateShrinkGrow(duration: 0.2)
-                    self.qpm.proceed()
+                    self.quickPickerViewModel.proceed()
                 }),
-            qpm.selection
+            quickPickerViewModel.selection
                 .map { !$0.isEmpty }
                 .bind(to: proceedButton.rx.isEnabled),
-            qpm.selection
+            quickPickerViewModel.selection
                 .map { !$0.isEmpty }
                 .bind(to: proceedButtonFill.rx.isEnabled),
             undoButton.rx.tap
-                .bind(onNext: qpm.undo),
+                .bind(onNext: quickPickerViewModel.undo),
             viewModel.countAttributes
                 .bind(onNext: setCountAttributes),
             viewModel.isUndoEnabled
                 .bind(to: undoButton.rx.isEnabled),
             viewModel.selectedSegmentIndex
-                .compactMap { self.qpm.tabKinds[safe: $0] }
-                .bind(to: qpm.selectedTabKind)
+                .compactMap { self.quickPickerViewModel.config.tabKinds[safe: $0] }
+                .bind(to: quickPickerViewModel.selectedTabKind)
         )
     }
     
@@ -118,8 +119,8 @@ class QPToolbarView: UIView {
         segmentStack.insertArrangedSubview(segment, at: min(segmentStack.subviews.count, 1))
         centerStack.isHidden = centerStack.subviews.isEmpty
         
-        undoButton.isHidden = qpm.selectionMode == .single
-        proceedButton.superview!.isHidden = qpm.selectionMode == .single
+        undoButton.isHidden = quickPickerViewModel.config.selectionMode == .single
+        proceedButton.superview!.isHidden = quickPickerViewModel.config.selectionMode == .single
         buttonsAndInfoStack.hideIfNoVisibleSubviews()
         
         fullWidthSegmentStack.hideIfNoVisibleSubviews()

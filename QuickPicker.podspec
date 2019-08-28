@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "QuickPicker"
-  s.version      = "0.9.1"
+  s.version      = "0.9.2"
   s.summary      = "The ultimate media picker"
 
   # This description is used to generate tags and improve search results.
@@ -106,8 +106,8 @@ Use QuickPicker to pick single or multiple photos or videos.
 
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
-
-  s.resources = "QuickPicker/UI/**/*.{storyboard,xib,xcassets,json,imageset,png}"
+  s.resource = "QuickPicker/UI/QPAssets.xcassets"
+  s.resources = "QuickPicker/**/*.{storyboard,xib,xcassets,json,imageset,png}"
   s.resource_bundles = {
     'QuickPicker' => ['QuickPicker/**/*.{storyboard,xib,xcassets,json,imageset,png}']
   }

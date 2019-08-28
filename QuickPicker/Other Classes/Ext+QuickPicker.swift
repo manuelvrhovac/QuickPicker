@@ -7,7 +7,7 @@ import Foundation
 import KVFetcher
 import Photos
 
-let bundle: Bundle = .init(for: QuickPickerViewController.self)
+let bundle: Bundle = .init(for: QuickPicker.self)
 
 extension PHAssetCollectionSubtype {
     

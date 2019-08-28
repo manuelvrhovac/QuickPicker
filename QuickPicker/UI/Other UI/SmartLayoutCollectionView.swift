@@ -40,4 +40,5 @@ class SmartLayoutCollectionView: UICollectionView, SmartLayoutProtocol {
     }
     
     
+    
 }

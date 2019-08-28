@@ -2,7 +2,6 @@
 //  Created by Manuel Vrhovac on 06/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
 //
-// swiftlint:disable all
 
 import Foundation
 

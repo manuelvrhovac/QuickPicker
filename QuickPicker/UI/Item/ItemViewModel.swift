@@ -41,7 +41,8 @@ class ItemViewModel: TabViewModel {
         return collection.localizedTitle ?? "Unknown Collection"
     }
     
-    var checkAllSelected: Bool {
+    var isAllSelected: Bool {
+        guard !latestAssetSelection.isEmpty else { return false }
         // If there's a cell (loaded) that isn't selected then false:
         if cellViewModels.contains(where: { $0.value.isSelected.value == false }) { return false }
         
@@ -69,11 +70,12 @@ class ItemViewModel: TabViewModel {
     
     // MARK: Observables
     
-    lazy var rxIsAllSelected: Observable<Bool> = selectedAssetsUndoStack.asObservable()
-        .map { _ in return self.checkAllSelected }
+    lazy var rxIsAllSelected: Observable<Bool> = selectedAssetsUndoStack
+        .asObservable()
+        .map { _ in return self.isAllSelected }
     
     lazy var selectAllButtonImage: Observable<UIImage> = rxIsAllSelected
-        .map { return ItemView.SelectAllButtonImages.image(for: $0) }
+        .map { return ItemView.SelectAllButtonImages.image(for: !$0) }
     
     
     // MARK: - Init
@@ -172,7 +174,7 @@ class ItemViewModel: TabViewModel {
     
     /// Executes in cases of "selectAll" and "deselectAll"
     func selectAll() {
-        let shouldSelectAll = !checkAllSelected
+        let shouldSelectAll = !isAllSelected
         let allAssetsHere = assetFetcher[0 ..< fetchResult.v.count]
         let newSelected = shouldSelectAll
             ? latestAssetSelection.union(allAssetsHere)

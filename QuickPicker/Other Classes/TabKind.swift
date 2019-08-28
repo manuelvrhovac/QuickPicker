@@ -8,6 +8,31 @@ import Photos
 
 
 /// Tab kind can be single collection (recentlyAdded, favorites, panoramas...) or a collection group (groupRegular, groupShared, groupSmart). For groups, AlbumView is displayed. For single collection ItemView is displayed.
+///
+/// Grouped:
+/// - groupRegular
+/// - groupShared
+/// - groupSmart
+///
+/// Single:
+/// - recentlyAdded
+/// - userLibrary
+/// - favorites
+/// - videos
+/// - screenshots
+/// - selfPortraits
+/// - panoramas
+/// - livePhotos
+/// - depthEffect
+/// - bursts
+/// - timelapses
+/// - slomoVideos
+/// - generic
+/// - longExposures
+/// - animated
+/// - allHidden
+/// - other
+
 public enum TabKind: String, Comparable {
     
     case groupRegular

@@ -715,3 +715,32 @@ final class ControlAction: NSObject {
         _action()
     }
 }
+
+class Stopwatch {
+    
+    var startTime = Date()
+    var counter = 0
+    
+    var elapsedMS: Int {
+        return Int(Date().timeIntervalSince(startTime)*1000)
+    }
+    
+    func lap(){
+        print("⏱\(counter) \(elapsedMS) ms")
+        counter += 1
+    }
+    
+    func r(){
+        startTime = .init()
+        counter = 0
+    }
+    
+    func since(){
+        lap()
+        r()
+    }
+    
+    init() {
+        
+    }
+}

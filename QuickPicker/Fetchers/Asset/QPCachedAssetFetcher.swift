@@ -12,15 +12,20 @@ class QPCachedAssetFetcher: KVFetcher<Int, PHAsset>.Caching {
     
     var result: PHFetchResult<PHAsset>!
     
+    // FIXME: remove this
+    //private var randomInts = [Int]()
+    
     override func _executeFetchValue(for key: Int, completion: ((PHAsset) -> Void)!) {
         guard let result = result, key < result.count else {
             fatalError("No result or key bigger than result!")
         }
         completion(result.object(at: key))
+        //completion(result.object(at: randomInts[key]))
     }
     
     convenience init(phFetchResult result: PHFetchResult<PHAsset>, cacher: Cacher) {
         self.init(cacher: cacher)
         self.result = result
+        //randomInts = Array( 0 ..< result.count ).shuffled()
     }
 }

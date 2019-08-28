@@ -11,7 +11,7 @@ public enum SelectionMode: Equatable {
     case single
     case multiple(max: Int)
     public static let multipleUnlimited: SelectionMode = .multiple(max: .max)
-    public static var random: SelectionMode { return [.single, .multiple(max: 1000)].random! }
+    public static var random: SelectionMode { return [.single, .multiple(max: 30)].random! }
     
     var max: Int {
         switch self {

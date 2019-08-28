@@ -32,9 +32,10 @@ class AlbumCellViewModel {
     
     // MARK: Observables
     
+    // FIXME: Use localized title only!
     lazy private(set) var title: Observable<String> = collection
         .asObservable()
-        .map { $0.localizedTitle ?? "" }
+        .map { return ($0.localizedTitle ?? "") }
     
     lazy private(set) var subtitle: Observable<String?> = count
         .asObservable()

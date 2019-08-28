@@ -6,7 +6,7 @@
 import Foundation
 import Photos
 
-
+/// OptionSet - Could be .photo, .video or [.photo, .video]
 public struct AllowedMedia: OptionSet {
     
     public let rawValue: Int
@@ -17,11 +17,11 @@ public struct AllowedMedia: OptionSet {
         self.rawValue = rawValue
     }
     
-    public var mediaTypes: [PHAssetMediaType] {
+    var mediaTypes: [PHAssetMediaType] {
         return !contains(.images) ? [.video] : contains(.videos) ? [.image, .video] : [.image]
     }
     
-    public var image: UIImage {
+    var image: UIImage {
         let imageName = !contains(.images) ? "video" : contains(.videos) ? "photovideo" : "photo"
         return UIImage(bundleNamed: imageName)
     }
@@ -31,7 +31,7 @@ public struct AllowedMedia: OptionSet {
         return am.random!
     }
     
-    public var fetchPredicate: NSPredicate? {
+    var fetchPredicate: NSPredicate? {
         if mediaTypes.count != 1 { return nil }
         return .init(format: "mediaType = \(mediaTypes[0].rawValue)")
     }
