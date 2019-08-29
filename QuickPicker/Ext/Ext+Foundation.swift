@@ -1,4 +1,4 @@
-// swiftlint:disable file_length
+// swiftlint:disable all
 //
 //  Created by Manuel Vrhovac on 06/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
@@ -722,20 +722,20 @@ class Stopwatch {
     var counter = 0
     
     var elapsedMS: Int {
-        return Int(Date().timeIntervalSince(startTime)*1000)
+        return Int(Date().timeIntervalSince(startTime) * 1000)
     }
     
-    func lap(){
+    func lap() {
         print("⏱\(counter) \(elapsedMS) ms")
         counter += 1
     }
     
-    func r(){
+    func r() {
         startTime = .init()
         counter = 0
     }
     
-    func since(){
+    func since() {
         lap()
         r()
     }

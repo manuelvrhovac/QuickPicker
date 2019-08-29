@@ -90,8 +90,16 @@ public enum TabKind: String, Comparable {
         case .screenshots :   return .smartAlbumScreenshots
         case .selfPortraits : return .smartAlbumSelfPortraits
         case .panoramas :     return .smartAlbumPanoramas
-        case .livePhotos :    return .smartAlbumLivePhotos
-        case .depthEffect :   return .smartAlbumDepthEffect
+        case .livePhotos :    if #available(iOS 10.3, *) {
+            return .smartAlbumLivePhotos
+        } else {
+            return .any
+        }
+        case .depthEffect :   if #available(iOS 10.2, *) {
+            return .smartAlbumDepthEffect
+        } else {
+            return .any
+        }
         case .bursts :        return .smartAlbumBursts
         case .timelapses :    return .smartAlbumTimelapses
         case .slomoVideos :   return .smartAlbumSlomoVideos

@@ -277,8 +277,6 @@ public class QuickPicker: UIViewController {
     }
     
     
-    
-    
     private func displayOverLimitMessage() {
         guard case .multiple(let max) = viewModel.config.selectionMode else { return }
         let alert = UIAlertController(title: "Maximum \(max) items", message: "You have selected more items than allowed", preferredStyle: .alert)
@@ -289,8 +287,6 @@ public class QuickPicker: UIViewController {
     }
     
 }
-
-
 
 
 public extension QuickPicker {

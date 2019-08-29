@@ -1,4 +1,5 @@
-//
+// swiftlint:disable all
+
 //  Created by Manuel Vrhovac on 29/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
 //

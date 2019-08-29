@@ -1,3 +1,4 @@
+// swiftlint:disable all
 //
 //  Created by Manuel Vrhovac on 06/01/2019.
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
@@ -13,7 +14,7 @@ enum CollectionPosition {
 }
 
 extension PHAsset {
-    @available(iOS 10.0, *)
+    
     var relatedSmartCollectionSubtype: PHAssetCollectionSubtype? {
         if isFavorite {
             return .smartAlbumFavorites
@@ -26,8 +27,16 @@ extension PHAsset {
             if representsBurst { return .smartAlbumBursts }
             if mediaSubtypes.contains(.photoPanorama) { return .smartAlbumPanoramas }
             if mediaSubtypes.contains(.photoScreenshot) { return .smartAlbumScreenshots }
-            if mediaSubtypes.contains(.photoLive) { return .smartAlbumLivePhotos }
-            if mediaSubtypes.contains(.photoDepthEffect) { return .smartAlbumDepthEffect }
+            if #available(iOS 10.3, *) {
+                if mediaSubtypes.contains(.photoLive) { return .smartAlbumLivePhotos }
+            } else {
+                return nil
+            }
+            if #available(iOS 10.2, *) {
+                if mediaSubtypes.contains(.photoDepthEffect) { return .smartAlbumDepthEffect }
+            } else {
+                return nil
+            }
             return nil
         }
     }
@@ -64,12 +73,14 @@ extension PHAssetCollectionSubtype {
 }
 
 extension IndexSet {
+    
     init(until: Int) {
         self = IndexSet.init(integersIn: (0..<until))
     }
 }
 
 extension CGSize {
+    
     var double: CGSize {
         return .init(width: width*2, height: height*2)
     }
@@ -80,7 +91,10 @@ extension CGSize {
 
 extension PHImageManager {
     
-    func getThumb(for asset: PHAsset?, in collection: PHAssetCollection, size s: CGSize, completion: @escaping (UIImage?) -> ()) {
+    func getThumb(for asset: PHAsset?,
+                  in collection: PHAssetCollection,
+                  size s: CGSize,
+                  completion: @escaping (UIImage?) -> ()) {
         
         guard let asset = asset else { return completion(nil) }
         
@@ -104,11 +118,14 @@ extension PHImageManager {
         
         imageRequestOptions.normalizedCropRect = cropRect
         
-        self.requestImage(for: asset, targetSize: retinaSquare, contentMode: PHImageContentMode.aspectFit, options: imageRequestOptions, resultHandler: { (image: UIImage?, info :[AnyHashable: Any]?) -> Void in
+        self.requestImage(
+            for: asset, targetSize: retinaSquare,
+            contentMode: PHImageContentMode.aspectFit,
+            options: imageRequestOptions,
+            resultHandler: { (image: UIImage?, info :[AnyHashable: Any]?) -> Void in
             DispatchQueue.main.async {
                 return completion(image)
             }
         })
     }
 }
-

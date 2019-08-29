@@ -1,3 +1,4 @@
+// swiftlint:disable all
 //
 //  Created by Manuel Vrhovac on 10/04/2019.
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
@@ -206,7 +207,7 @@ extension UIView {
     func snapTo(view: UIView, side: NSLayoutConstraint.Attribute, constant: CGFloat?, edges: UIEdgeInsets = UIEdgeInsets()) {
         let constants = [edges.top, edges.right, edges.bottom, edges.left]
         let distances = Dictionary(uniqueKeysWithValues: zip(NSLayoutConstraint.Attribute.allSides, constants))
-        let snappedDistances = Dictionary.init(uniqueKeysWithValues: distances.filter { $0.key != side.opposite})
+        let snappedDistances = Dictionary(uniqueKeysWithValues: distances.filter { $0.key != side.opposite })
         snapTo(view: view, distances: snappedDistances)
         if let constant = constant { // add width or height
             let widthOrHeightAttribute = side.sizeAttribute
@@ -247,7 +248,7 @@ extension UIView {
         
         for (attribute, constant) in distances {
             let invert = [.bottom, .right].contains(attribute)
-            var existing = view.constraints.first(where: { $0.firstAttribute == attribute})
+            var existing = view.constraints.first(where: { $0.firstAttribute == attribute })
             if existing == nil {
                 existing = NSLayoutConstraint(
                     item: self,
@@ -287,7 +288,7 @@ extension UIView {
 extension NSLayoutConstraint.Attribute {
     // ordered as in clock 12, 3, 6, 9 (top, trailing, bottom, leading)
     static let allSides: [NSLayoutConstraint.Attribute] = [.top, .trailing, .bottom, .leading]
-    var isVertical: Bool   { return self == .bottom  || self == .top }
+    var isVertical: Bool { return self == .bottom  || self == .top }
     var isHorizontal: Bool { return self == .leading || self == .trailing }
     var sizeAttribute: NSLayoutConstraint.Attribute { return isVertical ? .height : .width }
     var opposite: NSLayoutConstraint.Attribute {
@@ -329,6 +330,7 @@ extension UIControl {
 }
 
 extension UIView {
+    
     var firstResponder: UIView? {
         guard !isFirstResponder else { return self }
         for subview in subviews {
@@ -482,6 +484,7 @@ extension CAGradientLayer {
 }
 
 extension UINavigationItem {
+    
     func addRightBarButtonItem(_ item: UIBarButtonItem) {
         if self.rightBarButtonItems == nil {
             self.rightBarButtonItems = []
@@ -514,7 +517,7 @@ extension UINavigationItem {
 extension UISegmentedControl {
         
     var segmentImageViews: [UIImageView] {
-        return subviews.flatMap { $0.subviews}.compactMap { subview in
+        return subviews.flatMap { $0.subviews }.compactMap { subview in
             if let iv = subview as? UIImageView, let i = iv.image, i.size.width > 5 {
                 return iv
             }
@@ -524,7 +527,7 @@ extension UISegmentedControl {
     
     var imageContentMode: ContentMode {
         get {
-            for subview in subviews.flatMap({ $0.subviews}) {
+            for subview in subviews.flatMap({ $0.subviews }) {
                 if let iv = subview as? UIImageView, let i = iv.image, i.size.width > 5 {
                     return iv.contentMode
                 }
@@ -532,7 +535,7 @@ extension UISegmentedControl {
             return contentMode
         }
         set {
-            for subview in subviews.flatMap({ $0.subviews}) {
+            for subview in subviews.flatMap({ $0.subviews }) {
                 if let iv = subview as? UIImageView, let i = iv.image, i.size.width > 5 {
                     iv.contentMode = .scaleAspectFit
                 }
@@ -560,6 +563,7 @@ extension UISegmentedControl {
 protocol SelfID: class {}
 
 extension SelfID {
+    
     static var selfID: String { return "\(Self.self)" }
     var selfID: String { return Self.selfID }
     
@@ -568,11 +572,11 @@ extension SelfID {
 }
 
 extension SelfID where Self: UIViewController {
+    
     //static func fromStoryboard() -> Self! { return Self.initWithStoryboardName(selfID) }
     static var selfNib: UINib { return UINib(nibName: selfID, bundle: selfBundle) }
     static var selfStoryboard: UIStoryboard { return UIStoryboard(type: Self.self) }
 }
-
 
 
 extension UIViewController: SelfID {}
@@ -598,4 +602,3 @@ extension UIStoryboard {
     }
     
 }
-

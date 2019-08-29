@@ -114,7 +114,6 @@ class ReviewViewController: UIViewController {
         return rvc
     }
 
-    
     func setupBindings() {
         let assetsChanged = viewModel
             .assets
