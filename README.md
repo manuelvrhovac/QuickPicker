@@ -1,5 +1,7 @@
 
 
+
+
 ![logo](https://github.com/manuelvrhovac/resources/blob/master/QuickPickerHeader.jpg?raw=true)
 
 Use `QuickPicker` to pick media from users Photos library, much like `UIImagePickerController`. 
@@ -12,28 +14,28 @@ Use `QuickPicker` to pick media from users Photos library, much like `UIImagePic
 - [Usage](#usage)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-- - [CocoaPods](#cocoapods)
-- - [Carthage](#carthage)
 - [License](#license)
 
 ## Requirements
 
-- iOS 10.3+
+- iOS 10.0+
 - Xcode 10.0+
 - Swift 4.2+
 - RxSwift and KVFetcher libraries
 
 ## Features
 
-- **Pick single or multiple items:**
+**Pick single or multiple items:**
 - Images, videos or both
 - Limit number of items 
 - Swipe and crawl down and up
 - Undo up to 20 steps
-- **Advanced UI:**
+
+**Better Navigation:**
 -  See attributes of items (favorite, video duration, slo-mo...)
-- Jump to specific collection(s) in 1-2 taps using tab controller
-- **Review Screen:**
+- Jump to specific collection(s) in 1-2 taps using tab bar
+
+**Review Screen:**
 - Preview selected images and videos before continuing
 - Scroll quickly through items (if more than 30)
 - Remove items
@@ -56,13 +58,13 @@ Use `QuickPicker` to pick media from users Photos library, much like `UIImagePic
 var config = QuickPicker.Config(selectionMode: .single, allowedMedia: .images)
 
 let quickPicker = QuickPicker(configuration: config, preselected: nil){ quickPicker, result in
-quickPicker.dismiss(animated: true)
-switch result {
-case .finished(let assets):
-print("Picked \(assets.count) assets")
-case .canceled:
-print("Canceled")
-}
+    quickPicker.dismiss(animated: true)
+    switch result {
+    case .finished(let assets):
+        print("Picked \(assets.count) assets")
+    case .canceled:
+        print("Canceled")
+    }
 }
 
 present(quickPicker, animated: true, completion: nil)
@@ -131,7 +133,7 @@ Both should be automatically added to your project if you install QuickPicker us
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. To integrate QuickPicker into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-platform :ios, '10.3'
+platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
