@@ -26,7 +26,6 @@
 		64325A13225DF13700205020 /* AlbumCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259E6225DF13700205020 /* AlbumCellView.swift */; };
 		64325A14225DF13700205020 /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259E7225DF13700205020 /* AlbumView.swift */; };
 		64325A15225DF13700205020 /* AlbumCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 643259E8225DF13700205020 /* AlbumCellView.xib */; };
-		64325A16225DF13700205020 /* QuickPickerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 643259E9225DF13700205020 /* QuickPickerViewController.storyboard */; };
 		64325A1D225DF13700205020 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259F3225DF13700205020 /* ReviewViewController.swift */; };
 		64325A1E225DF13700205020 /* CTNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259F4225DF13700205020 /* CTNavigationController.swift */; };
 		64325A20225DF13700205020 /* QuickPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643259F7225DF13700205020 /* QuickPicker.swift */; };
@@ -130,7 +129,6 @@
 		643259E6225DF13700205020 /* AlbumCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCellView.swift; sourceTree = "<group>"; };
 		643259E7225DF13700205020 /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
 		643259E8225DF13700205020 /* AlbumCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCellView.xib; sourceTree = "<group>"; };
-		643259E9225DF13700205020 /* QuickPickerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QuickPickerViewController.storyboard; sourceTree = "<group>"; };
 		643259EC225DF13700205020 /* QPImageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QPImageFetcher.swift; sourceTree = "<group>"; };
 		643259F0225DF13700205020 /* QPImageCacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QPImageCacher.swift; sourceTree = "<group>"; };
 		643259F3225DF13700205020 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 		642DBB582264D0FA00B9EC4E /* QuickPicker */ = {
 			isa = PBXGroup;
 			children = (
-				643259E9225DF13700205020 /* QuickPickerViewController.storyboard */,
 				643259F7225DF13700205020 /* QuickPicker.swift */,
 				64AD07A3231683EF002BC0A6 /* QuickPicker+Configuration.swift */,
 				642DBB70226534F100B9EC4E /* QuickPicker+ViewModel.swift */,
@@ -515,7 +512,6 @@
 				648D184A226B2B8600983CA0 /* ReviewViewController.storyboard in Resources */,
 				6429607623159D5B00DB8D49 /* README.md in Resources */,
 				648A8B0B22A1200400444853 /* QPToolbarView.xib in Resources */,
-				64325A16225DF13700205020 /* QuickPickerViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

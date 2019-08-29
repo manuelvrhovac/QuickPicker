@@ -91,6 +91,8 @@ var config = QuickPicker.Config(selectionMode: .multiple(max: 30), allowedMedia:
 - **showsLimit**: If limited count, display how many photos remaining or don't
 - **preselected**: Assets that should be selected in advance
 - **presentFirstOfferMoreLater**: Similar to how WhatsApp works - start as picking a single image/video and then offer the option to continue picking multiple.
+- **maximumThumbnailSize**: Dimension of item thumbnail in collection view. It will be resized under this value to fill the screen width. Default: [.phone: 100, .pad: 130]
+- **tintColor**: The tintColor of the picker (nil = usual iOS blue)
 
 ### Defining custom Tabs
 

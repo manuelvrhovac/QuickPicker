@@ -88,17 +88,21 @@ extension QuickPicker {
                                                                      options: nil)
                 let collections = result.objects(at: .init(0..<result.count))
                 if kind.isSingle {
-                    let itemViewModel = ItemViewModel(kind: kind,
-                                                      collection: collections.first!,
-                                                      allowedMedia: config.allowedMedia,
-                                                      selectionMode: config.selectionMode,
-                                                      maxItemSize: [.pad: 150.0, .phone: 100.0],
-                                                      delegateSelected: selectionStack,
-                                                      fetchResult: nil)
+                    let itemViewModel = ItemViewModel(
+                        kind: kind,
+                        collection: collections.first!,
+                        allowedMedia: config.allowedMedia,
+                        selectionMode: config.selectionMode,
+                        maxItemSize: config.maximumThumbnailSize,
+                        delegateSelected: selectionStack,
+                        fetchResult: nil
+                    )
                     tabViewModels[kind] = itemViewModel
                 } else {
-                    let albumViewModel = AlbumViewModel(kind: kind,
-                                                        collections: collections)
+                    let albumViewModel = AlbumViewModel(
+                        kind: kind,
+                        collections: collections
+                    )
                     albumViewModel.selectedCollection.bind(onNext: open).disposed(by: bag)
                     tabViewModels[kind] = albumViewModel
                 }
@@ -124,7 +128,7 @@ extension QuickPicker {
                                     collection: collection,
                                     allowedMedia: config.allowedMedia,
                                     selectionMode: config.selectionMode,
-                                    maxItemSize: [.pad: 150.0, .phone: 100.0],
+                                    maxItemSize: config.maximumThumbnailSize,
                                     delegateSelected: selectionStack,
                                     fetchResult: cachedCollectionFetchResults[collection])
             itemViewModel.accept(ivm)

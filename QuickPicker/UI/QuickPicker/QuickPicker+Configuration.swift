@@ -15,6 +15,8 @@ public extension QuickPicker {
     /// - **showsLimit**: If limited count, display how many photos remaining or don't
     /// - **preselected**: Assets that should be selected in advance
     /// - **presentFirstOfferMoreLater**: Start as picking single item, go onto review screen when item is picked and then offer to pick more items (multiple). Selection has to be set to multple.
+    /// - **maximumThumbnailSize**: Dimension of item thumbnail in collection view. It will be resized under this value to fill the screen width.
+    /// - **tintColor**: The tintColor of the picker (nil = usual iOS blue)
     struct Config {
         
         /// Selection mode can be single or multiple
@@ -35,25 +37,31 @@ public extension QuickPicker {
         /// If picking multiple, go onto review screen as soon as one item is picked. Offer to pick more in review screen.
         public var presentFirstOfferMoreLater: Bool
         
+        /// Dimension of item thumbnail in collection view. It will be resized under this value to fill the screen width. Default: [.phone: 100, .pad: 130]
+        public var maximumThumbnailSize: [UIUserInterfaceIdiom: CGFloat]
+        
         /// The tint color of the QuickPicker user interface. Has to be preset before showing!
         public var tintColor: UIColor?
         
+        
         /// Random configuration options. Testing uses only.
-        public static let `random`: Config = .init(selectionMode: .random,
-                                                          allowedMedia: .random,
-                                                          showsLimit: .random(),
-                                                          needsConfirmation: .random(),
-                                                          tabKinds: .random,
-                                                          presentFirstOfferMoreLater: .random(),
-                                                          tintColor: nil)
-        
-        
+        public static let `random`: Config = .init(
+            selectionMode: .random,
+            allowedMedia: .random,
+            showsLimit: .random(),
+            needsConfirmation: .random(),
+            tabKinds: .random,
+            presentFirstOfferMoreLater: .random(),
+            maximumThumbnailSize: [.pad: CGFloat.random(in: 90 ... 180),
+                                   .phone: CGFloat.random(in: 90 ... 180)],
+            tintColor: nil
+        )
     }
 }
 
 extension QuickPicker.Config {
     
-    /// Most typical picker for single/multiple image/video. Shows limit, needs confirmation, default tab kinds.
+    /// Most typical picker for single/multiple image/video. Shows limit, needs confirmation, default tab kinds. Thumbnail size: [.phone: 100, .pad: 130]
     public init(selectionMode: SelectionMode, allowedMedia: AllowedMedia) {
         self.init(selectionMode: selectionMode,
                   allowedMedia: allowedMedia,
@@ -61,6 +69,7 @@ extension QuickPicker.Config {
                   needsConfirmation: true,
                   tabKinds: .default,
                   presentFirstOfferMoreLater: false,
+                  maximumThumbnailSize: [.phone: 100, .pad: 130],
                   tintColor: nil)
     }
     

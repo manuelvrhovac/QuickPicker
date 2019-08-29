@@ -80,13 +80,16 @@ class ItemView: SmartLayoutCollectionView, DefaultCellProtocol {
             viewModel.maxItemSize
                 .bind(onNext: setMaxItemSize)
         )
+        //setMaxItemSize(optMaxItemSize: viewModel.maxItemSize.value)
     }
     
     
     func setMaxItemSize(optMaxItemSize: [UIUserInterfaceIdiom: CGFloat]?) {
         let defaultSizes: [UIUserInterfaceIdiom: CGFloat] = [.phone: 100.0, .pad: 150.0]
         let idiom = UIDevice.current.userInterfaceIdiom
-        let maxItemSize = optMaxItemSize?[idiom] ?? defaultSizes[idiom] ?? 100.0
+        let maxItemSize = optMaxItemSize?[optional: idiom]
+            ?? defaultSizes[optional: idiom]
+            ?? 100.0
         maximumItemWidth = maxItemSize
         smartLayout()
     }

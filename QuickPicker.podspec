@@ -63,11 +63,11 @@ Use QuickPicker to pick single or multiple photos or videos.
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-   s.platform     = :ios, "10.3"
+   s.platform     = :ios, "10.0"
    s.swift_versions = "4.2"
 
   #  When using multiple platforms
-   s.ios.deployment_target = "10.3"
+   s.ios.deployment_target = "10.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
