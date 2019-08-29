@@ -2,6 +2,7 @@
 
 
 
+
 ![logo](https://github.com/manuelvrhovac/resources/blob/master/QuickPickerHeader.jpg?raw=true)
 
 Use `QuickPicker` to pick media from users Photos library, much like `UIImagePickerController`. 
@@ -31,8 +32,9 @@ Use `QuickPicker` to pick media from users Photos library, much like `UIImagePic
 - Swipe and crawl down and up
 - Undo up to 20 steps
 
-**Better Navigation:**
+**Better Navigation and UI:**
 -  See attributes of items (favorite, video duration, slo-mo...)
+- Set thumbnail size per device idiom (pad/phone)
 - Jump to specific collection(s) in 1-2 taps using tab bar
 
 **Review Screen:**
@@ -84,15 +86,15 @@ var config = QuickPicker.Config(selectionMode: .multiple(max: 30), allowedMedia:
 
 #### All configuration options:
 
-- **allowedMedia**: OptionSet - What media is allowed to be picked (image/video/both).
-- **picking**: Selection mode - can be single or multiple (with limit or unlimited).
-- **customTabKinds**: Options that appear in the segmented control (default: Recently Added, favorites, My Albums, iCloud albums, smartAlbums)
-- **needsConfirmation**: Should display a popup where user can review picked photo(s)
-- **showsLimit**: If limited count, display how many photos remaining or don't
-- **preselected**: Assets that should be selected in advance
-- **presentFirstOfferMoreLater**: Similar to how WhatsApp works - start as picking a single image/video and then offer the option to continue picking multiple.
-- **maximumThumbnailSize**: Dimension of item thumbnail in collection view. It will be resized under this value to fill the screen width. Default: [.phone: 100, .pad: 130]
-- **tintColor**: The tintColor of the picker (nil = usual iOS blue)
+- **allowedMedia**: `AllowedMedia` - OptionSet - What media is allowed to be picked (image/video/both).
+- **picking**: `SelectionMode` - can be single or multiple (with limit or unlimited).
+- **customTabKinds**: `[TabKind]` - Options that appear in the segmented control (default: Recently Added, favorites, My Albums, iCloud albums, smartAlbums)
+- **needsConfirmation**: `Bool` - Should display a popup where user can review picked photo(s)
+- **showsLimit**: `Bool` - If limited count, display how many photos remaining or don't
+- **preselected**: `[PHAsset]` - Assets that should be selected in advance
+- **presentFirstOfferMoreLater**: `Bool` - Similar to how WhatsApp works - start as picking a single image/video and then offer the option to continue picking multiple.
+- **maximumThumbnailSize**:  `[UIUserInterfaceIdiom: CGFloat]` - Dimension of item thumbnail in collection view. It will be resized under this value to fill the screen width. Default: `[.phone: 100, .pad: 130]`
+- **tintColor**: `UIColor?` - The tintColor of the picker (nil = usual iOS blue)
 
 ### Defining custom Tabs
 
@@ -127,6 +129,14 @@ config.tabKinds = [.recentlyAdded, .favorites, .groupRegular, .groupSmart]
 - KVFetcher (0.9.1) - my own - https://github.com/manuelvrhovac/KVFetcher
 
 Both should be automatically added to your project if you install QuickPicker using CocoaPods (Podfile). I'm not sure how this should play out if you already use some version of RxSwift or don't plan on using CocoaPods.
+
+## Ideas for future development
+
+- Peek and Pop (long press) images and videos in item list. 
+- Camera capture - A screen or a button leading to camera interface
+- Make the configuration reactive - would enable to change things like thumbnail size or tintColor on the go
+- Providing full/downsized image and video objects on finish instead of just a PHAsset array
+- Live video thumbnails (optional, for more powerful devices)
 
 ## Installation
 
