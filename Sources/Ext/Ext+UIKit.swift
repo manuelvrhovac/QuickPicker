@@ -4,8 +4,8 @@
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
 
-import Foundation
 
+import Foundation
 import UIKit
 
 public extension UIImage {

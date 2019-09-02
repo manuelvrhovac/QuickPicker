@@ -3,7 +3,9 @@
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
 
+
 import Foundation
+import UIKit
 
 /// A collection view implementing the SmartLayoutProtocol - resizes cell according to available space and defined maximum cell width.
 class SmartLayoutCollectionView: UICollectionView, SmartLayoutProtocol {

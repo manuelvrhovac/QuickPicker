@@ -3,7 +3,9 @@
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
 
+
 import Foundation
+import UIKit
 
 /// Little black rectangle that appears in center of some UIView with a message and disappears quickly. Like Volume HUD, for example.
 class HUDView: UIView {

@@ -3,7 +3,9 @@
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
 
+
 import Foundation
+import UIKit
 import Photos
 
 /// OptionSet - Could be .photo, .video or [.photo, .video]

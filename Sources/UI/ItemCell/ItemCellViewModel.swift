@@ -3,6 +3,7 @@
 //  Copyright © 2018 Manuel Vrhovac. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Photos
 import KVFetcher

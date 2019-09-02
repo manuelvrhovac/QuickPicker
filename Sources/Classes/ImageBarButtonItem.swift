@@ -3,7 +3,9 @@
 //  Copyright © 2019 Manuel Vrhovac. All rights reserved.
 //
 
+
 import Foundation
+import UIKit
 
 /// A UIBarButtonItem subclass with 'button' property. Also has 'image' property for easier image assigning.
 class ImageBarButtonItem: UIBarButtonItem {
