@@ -53,6 +53,7 @@
 		64AD07A4231683EF002BC0A6 /* QuickPicker+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64AD07A3231683EF002BC0A6 /* QuickPicker+Configuration.swift */; };
 		64BA9532226B5CE400AF2CE0 /* Ext+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA9531226B5CE400AF2CE0 /* Ext+RxSwift.swift */; };
 		64C07E9222A7B7C000A6FF2A /* ImageBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C07E9122A7B7C000A6FF2A /* ImageBarButtonItem.swift */; };
+		64CBEED4231CFDDD00FFA3F5 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBEED3231CFDDD00FFA3F5 /* Package.swift */; };
 		64CF3B1E22A9212200871ACE /* QuickPicker.framework in Export Framework (copy files) */ = {isa = PBXBuildFile; fileRef = 643259C3225DF12A00205020 /* QuickPicker.framework */; };
 		64E16A1A22B1812D00A6DB18 /* SelectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E16A1922B1812D00A6DB18 /* SelectionMode.swift */; };
 		64E16A1C22B1816000A6DB18 /* QPPAllowedMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E16A1B22B1816000A6DB18 /* QPPAllowedMedia.swift */; };
@@ -156,6 +157,7 @@
 		64AD07A3231683EF002BC0A6 /* QuickPicker+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickPicker+Configuration.swift"; sourceTree = "<group>"; };
 		64BA9531226B5CE400AF2CE0 /* Ext+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+RxSwift.swift"; sourceTree = "<group>"; };
 		64C07E9122A7B7C000A6FF2A /* ImageBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageBarButtonItem.swift; path = ../../Classes/ImageBarButtonItem.swift; sourceTree = "<group>"; };
+		64CBEED3231CFDDD00FFA3F5 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		64CF3AEC22A91BF600871ACE /* QuickPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuickPicker.framework; sourceTree = "<group>"; };
 		64E16A1922B1812D00A6DB18 /* SelectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMode.swift; sourceTree = "<group>"; };
 		64E16A1B22B1816000A6DB18 /* QPPAllowedMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QPPAllowedMedia.swift; sourceTree = "<group>"; };
@@ -283,12 +285,15 @@
 		643259B9225DF12A00205020 = {
 			isa = PBXGroup;
 			children = (
+				64CBEED3231CFDDD00FFA3F5 /* Package.swift */,
 				642960712315995F00DB8D49 /* .gitignore */,
 				64CF3AEC22A91BF600871ACE /* QuickPicker.framework */,
 				6429607723159DDD00DB8D49 /* QuickPicker.podspec */,
 				6429607523159D5B00DB8D49 /* README.md */,
 				6429607323159D4F00DB8D49 /* LICENSE.md */,
-				643259C5225DF12A00205020 /* QuickPicker */,
+				643259C6225DF12A00205020 /* QuickPicker.h */,
+				643259C7225DF12A00205020 /* Info.plist */,
+				643259C5225DF12A00205020 /* Sources */,
 				643259D0225DF12A00205020 /* QuickPickerTests */,
 				643259C4225DF12A00205020 /* Products */,
 				845546173A2260F0DC850E3C /* Pods */,
@@ -305,7 +310,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		643259C5225DF12A00205020 /* QuickPicker */ = {
+		643259C5225DF12A00205020 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				64296062231593CD00DB8D49 /* Ext */,
@@ -313,10 +318,8 @@
 				643259EA225DF13700205020 /* Fetchers */,
 				643259DE225DF13700205020 /* UI */,
 				64296025231554EB00DB8D49 /* Other Classes */,
-				643259C6225DF12A00205020 /* QuickPicker.h */,
-				643259C7225DF12A00205020 /* Info.plist */,
 			);
-			path = QuickPicker;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		643259D0225DF12A00205020 /* QuickPickerTests */ = {
@@ -621,6 +624,7 @@
 				642DBB7A2265EE0400B9EC4E /* ItemCellView.swift in Sources */,
 				644ADA622317C15600648E3B /* SBInitializable.swift in Sources */,
 				648A8B0D22A1222300444853 /* QPToolbarView.swift in Sources */,
+				64CBEED4231CFDDD00FFA3F5 /* Package.swift in Sources */,
 				648A8B0F22A145BB00444853 /* QPToolbarViewModel.swift in Sources */,
 				64325A1D225DF13700205020 /* ReviewViewController.swift in Sources */,
 				64325A0E225DF13700205020 /* ItemCellViewModel.swift in Sources */,
@@ -787,7 +791,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = QuickPicker/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -824,7 +828,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = QuickPicker/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
